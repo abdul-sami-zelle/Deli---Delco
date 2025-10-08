@@ -14,9 +14,11 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import ProductDetailModal from "../ProductDetailModal/ProductDetailModal";
 import ProductCard from "../ProductCard/ProductCard";
+import Departments2 from "../Department2/departments";
 
-const Products = ({ scrollToSection }) => {
+const Products = ({ scrollToSection , onClick }) => {
   const [sections, setSections] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingProduct, setLoadingProduct] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -50,6 +52,7 @@ const Products = ({ scrollToSection }) => {
       const res = await getLandingPageData();
       if (res && res.sections) {
         setSections(res.sections);
+        setDepartments(res.featured_categories);
       }
       setLoading(false);
     }
@@ -87,100 +90,105 @@ const Products = ({ scrollToSection }) => {
 
 
   return (
-    <div className="products-container">
-      {loading
-        ? [...Array(2)].map((_, secIndex) => (
-          <div key={secIndex} className="section-block">
-            <div className="products-header">
-              <span
-                className="shimmer shimmer-text"
-                style={{
-                  width: "200px",
-                  height: "28px",
-                  marginLeft: "inherit",
-                }}
-              ></span>
-              <span
-                className="shimmer shimmer-text"
-                style={{
-                  width: "80px",
-                  height: "16px",
-                  marginRight: "inherit",
-                }}
-              ></span>
-            </div>
-            <span className="horizontal-line"></span>
+    <div>
+      {departments.length > 0 && <Departments2 departments={departments} onClick={onClick} />}
+      <div className="main-bg">
+        <div className="products-container">
+          {loading
+            ? [...Array(2)].map((_, secIndex) => (
+              <div key={secIndex} className="section-block">
+                <div className="products-header">
+                  <span
+                    className="shimmer shimmer-text"
+                    style={{
+                      width: "200px",
+                      height: "28px",
+                      marginLeft: "inherit",
+                    }}
+                  ></span>
+                  <span
+                    className="shimmer shimmer-text"
+                    style={{
+                      width: "80px",
+                      height: "16px",
+                      marginRight: "inherit",
+                    }}
+                  ></span>
+                </div>
+                <span className="horizontal-line"></span>
 
-            <div className="carousel-wrapper">
-              <div className="product_card_container">
-                {[...Array(8)].map((_, i) => (
-                  <div className="product-card" key={i}>
-                    <div className="shimmer shimmer-img"></div>
-                    <div
-                      className="shimmer shimmer-text"
-                      style={{
-                        width: "100%",
-                        height: "14px",
-                        marginTop: "10px",
-                      }}
-                    ></div>
+                <div className="carousel-wrapper">
+                  <div className="product_card_container">
+                    {[...Array(8)].map((_, i) => (
+                      <div className="product-card" key={i}>
+                        <div className="shimmer shimmer-img"></div>
+                        <div
+                          className="shimmer shimmer-text"
+                          style={{
+                            width: "100%",
+                            height: "14px",
+                            marginTop: "10px",
+                          }}
+                        ></div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
-        ))
-        : sections?.map((section, index) => (
-          <div ref={(el) => (sectionRefs.current[section?.sec_name] = el)} key={section?._id} className="section-block">
-            <div className="products-header">
-              <span>{section.sec_name}</span>
-              <p>
-                See more <FaChevronRight color="#2162a1" size={12} />
-              </p>
-            </div>
-            <span className="horizontal-line"></span>
+            ))
+            : sections?.map((section, index) => (
+              <div ref={(el) => (sectionRefs.current[section?.categories[0]._id] = el)} key={section?._id} className="section-block">
+                <div className="products-header">
+                  <span>{section.sec_name}</span>
+                  <p>
+                    See more <FaChevronRight  size={12} />
+                  </p>
+                </div>
+                <span className="horizontal-line"></span>
 
-            <div className="carousel-wrapper">
-              <button
-                className="arrow-btn left"
-                onClick={() => scroll(index, "left")}
-              >
-                <FaChevronLeft />
-              </button>
+                <div className="carousel-wrapper">
+                  <button
+                    className="arrow-btn left"
+                    onClick={() => scroll(index, "left")}
+                  >
+                    <FaChevronLeft />
+                  </button>
 
-              <div
-                className="product_card_container"
-                ref={(el) => (scrollRefs.current[index] = el)}
-              >
-                {section.products.map((product) => {
-                  const item = getCartItem(product._id);
-                  return (
-                    <div key={product?._id}>
-                      <ProductCard product={product} allProducts={section?.products} />
+                  <div
+                    className="product_card_container"
+                    ref={(el) => (scrollRefs.current[index] = el)}
+                  >
+                    {section.products.map((product) => {
+                      const item = getCartItem(product._id);
+                      return (
+                        <div key={product?._id} onClick={() => handleProductClick(product)}>
+                          <ProductCard product={product} allProducts={section?.products} />
 
-                    </div>
-                  );
-                })}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <button
+                    className="arrow-btn right"
+                    onClick={() => scroll(index, "right")}
+                  >
+                    <FaChevronRight />
+                  </button>
+                </div>
               </div>
-
-              <button
-                className="arrow-btn right"
-                onClick={() => scroll(index, "right")}
-              >
-                <FaChevronRight />
-              </button>
-            </div>
-          </div>
-        ))}
-      {showModal && selectedProduct && (
-        <ProductDetailModal
-          product={selectedProduct}
-          onClose={(newProduct) => {
-            newProduct ? handleProductClick(newProduct) : setShowModal(false);
-          }}
-          allProducts={similarProducts}
-        />
-      )}
+            ))}
+          {showModal && selectedProduct && (
+            <ProductDetailModal
+              product={selectedProduct}
+              onClose={(newProduct) => {
+                newProduct ? handleProductClick(newProduct) : setShowModal(false);
+              }}
+              allProducts={similarProducts}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

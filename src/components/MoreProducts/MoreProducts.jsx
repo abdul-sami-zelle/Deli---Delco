@@ -122,7 +122,7 @@ const MoreProducts = () => {
               <div className="products-header">
                 <span>{section.sec_name}</span>
                 <p>
-                  See more <FaChevronRight color="#2162a1" size={12} />
+                  See more <FaChevronRight  size={12} />
                 </p>
               </div>
               <span className="horizontal-line"></span>

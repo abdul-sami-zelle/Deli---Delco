@@ -76,7 +76,7 @@ export default function ProductCard({
             <img
               src={`${BASE_URL}${product?.image}`}
               alt={product.title}
-              onClick={handleImageClick}
+              // onClick={handleImageClick}
             />
 
             <div className="product-info">
@@ -92,7 +92,9 @@ export default function ProductCard({
                   )}
                 </p>
               )}
-              <h4 className="name" onClick={handleNameClick}>
+              <h4 className="name"
+              //  onClick={handleNameClick}
+               >
                 {product.title}
               </h4>
             </div>

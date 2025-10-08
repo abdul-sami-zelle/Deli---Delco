@@ -30,7 +30,7 @@ const poppins = Poppins({
 
 
 export const metadata = {
-  title: "Delco Farmers Market",
+  title: "Deli - Delco Farmers Market",
   description: "Fresh produce and groceries from Delco Farmers Market.",
   icons: {
     icon: "/edit-logo.png",

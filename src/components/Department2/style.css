@@ -1,7 +1,23 @@
-.categories_slider {
-  width: 100%;
-  margin: 20px auto;
+/* ✅ Space between slides — clean, aligned edges */
+.categories_slider .slick-slide {
+  padding: 0 5px; /* Adjust spacing here (10px each side = 20px total gap) */
 }
+
+
+.categories_slider_wrapper{
+  position: relative;
+  max-width: var(--max-width--global); 
+  margin: 0 auto;
+}
+
+.categories_slider {
+  /* width: 100%; */
+  margin: var(--section-gap) auto 10px;
+  position: relative;
+  
+}
+
+
 
 .category_card {
   padding: 4px;
@@ -37,6 +53,7 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     z-index: 999;
     transition: all 0.3s;
+    z-index: 9999 !important;  
     &:hover{
         background: #4B5320;
     }
@@ -48,9 +65,9 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .custom-next {
-  right: 10px;
+  right: -5px; /* arrow thoda bahar */
 }
 
 .custom-prev {
-  left: 10px;
+  left: -5px; /* arrow thoda bahar */
 }

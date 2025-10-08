@@ -100,13 +100,13 @@ const SaleProducts = ({ scrollToSection }) => {
   return (
     <div
       className="sales-products-container"
-      style={{
-        backgroundColor: container?.bgColor
-          ? container.bgColor.startsWith("#")
-            ? container.bgColor
-            : `#${container.bgColor}`
-          : "transparent",
-      }}
+      // style={{
+      //   backgroundColor: container?.bgColor
+      //     ? container.bgColor.startsWith("#")
+      //       ? container.bgColor
+      //       : `#${container.bgColor}`
+      //     : "transparent",
+      // }}
     >
       {sections?.map((section, index) => {
         const sectionImage = section?.image
@@ -137,7 +137,7 @@ const SaleProducts = ({ scrollToSection }) => {
                 <div className="sales-header">
                   <span>{section?.sec_name}</span>
                   <p>
-                    See more <FaChevronRight color="#2162a1" size={12} />
+                    See more <FaChevronRight  size={12} />
                   </p>
                 </div>
 
@@ -176,7 +176,7 @@ const SaleProducts = ({ scrollToSection }) => {
 
                           return (
 
-                            <div key={item?._id}>
+                            <div key={item?._id} onClick={() => handleProductClick(item)}>
                               <ProductCard product={item} allProducts={section?.products} />
                             </div>
                           );
