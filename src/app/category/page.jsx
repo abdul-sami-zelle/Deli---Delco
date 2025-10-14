@@ -1,6 +1,7 @@
 import Category from '../../components/Category/Category'
 import Header from '../../components/Header/Header'
-import React from 'react'
+import React from 'react';
+
 
 const page = () => {
   return (

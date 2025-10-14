@@ -37,19 +37,16 @@ export default function Home() {
       <div className={`main-layout`}>
         <div className="main-content">
           {/* <HeroSection2/> */}
-          <MainSlider/>
-          <Departments2/>
-          <div className="main-bg">
-            <Products scrollToSection={scrollToSection} />
-          </div>
+          <MainSlider />
+          <Products scrollToSection={scrollToSection} onClick={(deptName) => setScrollToSection(deptName)} />
           <div
             className="sale-product-container"
             style={{ backgroundColor: saleBgColor }}
           >
             <SaleProducts scrollToSection={scrollToSectionSale} />
           </div>
-          <FtBanner/>
-         
+          <FtBanner />
+
           <Footer />
         </div>
         <SideCart />

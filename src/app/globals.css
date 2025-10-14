@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  background-color: #eaeded;
+  background-color: #F8F8F9;
   /* font-family: "Poppins",  sans-serif; */
   font-weight: 300;
   font-family: var(--font-poppins), sans-serif;
@@ -27,12 +27,13 @@ body {
   --navy-blue: #3c4d5f;
   --light-gray: #f5f5f5;
   --text-color: #1f2c3a;
-  --black: #000000;
+  --black: #5b5d64;
   --text-gray: #64717e;
   --footer-color: #757575;
   --header-bg: #0000004d;
   --footer-last: #505050;
   --charcoal-text: #595959;
+  --white-gray: #F8F8F9;
 
   --light-green: #929a67;
   --light-medium-green: #6a733a;
@@ -146,4 +147,23 @@ body {
   --articleCard-width: inherit;
   --recipeCard-width: inherit;
   --featureCard-width: inherit;
+
+  --color-gray--30: #ccc;
+  --color-gray--40: #707070;
+  --color-gray--60: #242729;
+  --color-gray--50: #3f3f3f;
+  --color-gray--40: #707070;
+  --color-gray--30: #ccc;
+  --color-gray--20: #e8e8e8;
+  --color-gray--10: #f5f5f5;
+
+  --max-width--global: 92%;
+  --section-gap: 20px;
+
+
+  --shimmer-base: #F8F8F9;
+  --shimmer-highlight: #ececec;
+  --shimmer-dark: #e0e0e0;
+  --shimmer-duration: 3s;
+  --br: 8px;
 }

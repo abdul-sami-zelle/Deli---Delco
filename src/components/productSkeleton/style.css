@@ -1,0 +1,128 @@
+/* Keep original product-card sizing & layout intact */
+.shimmer-card {
+  background: var(--shimmer-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* shimmer gradient animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+
+/* base shimmer block */
+.shimmer-image,
+.shimmer-line,
+.shimmer-btn,
+.shimmer-count {
+  animation: shimmer var(--shimmer-duration) linear infinite;
+  background: linear-gradient(
+    90deg,
+    var(--shimmer-base) 25%,
+    var(--shimmer-highlight) 50%,
+    var(--shimmer-base) 75%
+  );
+  background-size: 200% 100%;
+}
+
+
+/* animated pseudo element overlays the block */
+.shimmer-image::after,
+.shimmer-line::after,
+.shimmer-btn::after,
+.shimmer-count::after {
+  content: "";
+  position: absolute;
+  left: -120%;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  animation: shimmer var(--shimmer-duration) linear infinite;
+}
+
+/* Image skeleton matches your image aspect ratio */
+.product-card img { /* original rule exists, we ensure skeleton matches */
+  /* keep this to preserve layout if needed */
+}
+
+/* size rules */
+.shimmer-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: 100%;
+  min-height: 160px; /* matches your default product image heights; tweak as needed */
+  border-radius: 6px;
+}
+
+/* info lines */
+.product-info {
+  display: flex;
+  margin: 8px 0px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shimmer-line {
+  height: 14px;
+  flex-basis: 100%;
+  margin-top: 6px;
+}
+
+/* size variants to mimic price / name / weight */
+.shimmer-price { width: 40%; height: 18px; border-radius: 6px; }
+.shimmer-name  { width: 85%; height: 38px; border-radius: 6px; } /* two-line name area */
+.shimmer-weight{ width: 30%; height: 14px; border-radius: 6px; }
+
+/* add-to-cart qty skeleton */
+.add-to-cart.others {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  /* background-color: var(--peace); */
+}
+
+.shimmer-qty {
+  width: 100%;
+}
+
+.shimmer-btn.small {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+}
+
+/* center count bubble */
+.shimmer-count {
+  width: 48px;
+  height: 20px;
+  border-radius: 6px;
+  align-self: center;
+}
+
+/* subtle variation so it doesn't look too uniform */
+.shimmer-line::after { animation-delay: 0s; }
+.shimmer-image::after { animation-delay: 0.08s; }
+.shimmer-price::after { animation-delay: 0.06s; }
+.shimmer-name::after { animation-delay: 0.12s; }
+.shimmer-weight::after { animation-delay: 0.02s; }
+.shimmer-btn::after { animation-delay: 0.18s; }
+.shimmer-count::after { animation-delay: 0.22s }
+
+/* Responsive tweaks (match your media queries) */
+@media (max-width: 768px) {
+  .shimmer-image { min-height: 136px; }
+  .shimmer-price { height: 16px; width: 45%; }
+  .shimmer-name { height: 32px; width: 100%; }
+  .shimmer-btn.small { width: 40px; height: 40px; }
+}

@@ -135,7 +135,7 @@ const ProductDetailModal = ({ product, onClose, allProducts }) => {
         </div>
 
         <div className="similar-products">
-          <h3>Similar Products</h3>
+          {(!loadingSimilar && similarProducts.length > 0) && <h3>Similar Products</h3>}
           <div className="product_card_container gap-reduce">
             {loadingSimilar
               ? Array(5)

@@ -30,7 +30,7 @@ const poppins = Poppins({
 
 
 export const metadata = {
-  title: "Delco Farmers Market",
+  title: "Butcher Shop - Delco Farmers Market",
   description: "Fresh produce and groceries from Delco Farmers Market.",
   icons: {
     icon: "/edit-logo.png",
@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={metadata.description} />
         <link rel="icon" href="/edit-logo.png" type="image/png" />
-        <title>Deli - Delco Farmers Market</title>
+        <title>Butcher Shop - Delco Farmers Market</title>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${balooBhai.variable} ${poppins.variable}`}>
         <CartProvider>

@@ -1,6 +1,26 @@
+.categories_slider_wrapper{
+  position: relative;
+  max-width: 92%; 
+  margin: 0 auto;
+
+}
+
 .categories_slider {
-  width: 100%;
-  margin: 20px auto;
+  /* width: 100%; */
+  margin: 20px auto 10px auto;
+  position: relative;
+    display: flex;
+  flex-direction: column;
+  
+}
+
+.categories_slider > .heading {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .category_card {
@@ -37,6 +57,7 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     z-index: 999;
     transition: all 0.3s;
+    z-index: 9999 !important;  
     &:hover{
         background: #4B5320;
     }
@@ -48,9 +69,14 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .custom-next {
-  right: 10px;
+  right: -5px; /* arrow thoda bahar */
 }
 
 .custom-prev {
-  left: 10px;
+  left: -5px; /* arrow thoda bahar */
+}
+
+
+.slick-track{
+  margin-left: 0 !important;
 }

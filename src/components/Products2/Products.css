@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 20px;
+  gap: 10px;
 }
 .section-block {
   border-radius: var(--br-8);
   background-color: white;
-  padding: 12px;
+  padding:16px 12px;
 }
 .carousel-wrapper {
   position: relative;
@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  color: var(--charcoal);
 }
 
 .arrow-btn.left {
@@ -63,7 +64,7 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: #0f1111;
+ color: var(--charcoal);
 }
 .products-header p {
   margin: 0;
@@ -73,7 +74,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: #2162a1;
+  color: var(--charcoal);
   cursor: pointer;
 }
 .horizontal-line {
@@ -154,14 +155,14 @@
 .product-price .price-int {
   font-size: 21px;
   font-weight: 500;
-  color: #0f1111;
+  color: var(--charcoal);
 }
 
 .product-price .price-dec {
   font-size: 12px;
   font-weight: 400;
   margin-top: 2px;
-  color: #0f1111;
+  color: var(--charcoal);
 }
 .product-Image {
   position: relative;

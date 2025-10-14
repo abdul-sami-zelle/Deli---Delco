@@ -1,68 +1,291 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "./Category.css";
 import { HiArrowNarrowRight } from "react-icons/hi";
+import { getCategoryProductsData } from "@/lib/api";
+import ProductCard from "../ProductCard/ProductCard";
+import AccordionFilter from "../accordian/accordian";
+import PriceRangeSlider from "../priceRangeSlider/priceRangeSlider";
+import CheckboxOpt2 from "../ChckboxOpt2/checkboxOpt";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import ShimmerProductCard from "../productSkeleton/productSkeleton";
+import Pagination from "../pagenation/pagenation";
+import { useSearchParams, useParams, useRouter } from "next/navigation";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { MdOutlineArrowRight, MdOutlineArrowLeft } from "react-icons/md";
+import { CartContext } from "../../context/addToCart";
 
-const Category = () => {
-  const [activeSub, setActiveSub] = useState("Featured");
+import CategoryCard2 from "../categoryCard2/categoryCard2";
+import SortDropdown from "../customDropdown/customDropDown";
+import SideCart from "../SideCart/SideCart";
 
-  const subCategories = [
-    "Featured",
-    "Chicken",
-    "Beef",
-    "Seafood",
-    "Pork",
-    "Turkey",
-    "Bacon",
-    "Sausage",
-    "Hot Dogs & Franks",
-    "Deli Meats",
-    "Frozen Meats",
-    "Frozen Seafood",
-    "Meat Substitutes",
+export default function Category({ deptCategories }) {
+  const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+
+  const scrollRef = useRef(null);
+  const scrollRefTop = useRef(null);
+
+  const {
+    cart,
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    setShowSideCart,
+  } = useContext(CartContext);
+
+
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
+
+
+
+
+
+  console.log("Department Categories:", deptCategories);
+
+  // Get category ID from URL like /category/[categoryId]
+  const categoryId = params?.categoryId;
+
+  // Get page from query string (default = 1)
+  const pageFromURL = Number(searchParams.get("page")) || 1;
+
+  const sortOptions = ["Relevance", "Price: Low to High", "Price: High to Low", "Newest First"];
+
+  const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(pageFromURL);
+  const [totalPages, setTotalPages] = useState(1);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+
+
+  useEffect(() => {
+    // scroll selected card into view
+    if (scrollRefTop.current) {
+      scrollRefTop.current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center", // horizontal scroll
+        block: "nearest",
+      });
+    }
+  }, [categoryId, deptCategories]); // run whenever selected category changes
+
+
+
+
+  const limit = 20;
+
+  const brands = ["Tysen", "Perdue", "Halal Chicken CO"];
+  const modes = [
+    { id: "lb", name: "Pound" },
+    { id: "kg", name: "Kilogram" },
+    { id: "each", name: "Each" },
   ];
 
-  return (
-    <>
-      <div style={{ backgroundColor: "white" }}>
-        <div className="category-header">
-          <div className="category-Image-with-name">
-            <img src="/assets/Images/depart1.png" alt="" />
-            <span>Meat & Seafood</span>
-          </div>
-          <span className="next-aisle-btn">
-            Next Aisle <HiArrowNarrowRight />
-          </span>
-        </div>
-        <div className="sub-categories-container">
-          {subCategories.map((item, index) => (
-            <span
-              key={index}
-              className={activeSub === item ? "active" : ""}
-              onClick={() => setActiveSub(item)}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div style={{ width: "80%", margin: "auto" }}>
-        <div className="catory-slider">
-          <div className="category-slider-left-section">
-            <span>Pre Brand</span>
-            <h1>High protein, 100% grass-fed beef ›</h1>
-          </div>
-          <div className="category-slider-right-section">
-            <img src="/assets/Images/catSlider1.jpg" alt="" />
-          </div>
-        </div>
-        <div>
-            
-        </div>
-      </div>
-    </>
-  );
-};
+  useEffect(() => {
+    async function fetchData() {
+      if (!categoryId) return;
+      setLoading(true);
+      const res = await getCategoryProductsData(limit, page, categoryId);
+      if (res.data) setProducts(res.data);
+      if (res.pagination) {
+        setPagination(res.pagination);
+        setTotalPages(res.pagination?.totalPages);
+        setTotalProducts(res.pagination?.totalProducts);
+      }
+      setLoading(false);
+    }
 
-export default Category;
+    fetchData();
+  }, [categoryId, page]);
+
+
+
+  // 🧭 Update URL when page changes
+  useEffect(() => {
+    const currentParams = new URLSearchParams(window.location.search);
+    currentParams.set("page", page);
+    router.replace(`?${currentParams.toString()}`, { scroll: false });
+  }, [page, router]);
+
+  const nextPage = () => {
+    if (page < totalPages) setPage((prev) => prev + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 1) setPage((prev) => prev - 1);
+  };
+
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [loading]);
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+  };
+
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    checkScroll(); // initial check
+
+    el.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll); // recalc on resize
+
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [deptCategories]);
+
+
+
+  return (
+    <div>
+      {/* HEADER */}
+      <div className="category-header">
+        <div className="category-Image-with-name">
+          <img src="/assets/Images/depart1.png" alt="category" />
+          <span>Butcher Shop</span>
+        </div>
+        {deptCategories && deptCategories.length > 0 && (
+          <div className="dept-categories-wrapper">
+            {canScrollLeft && (
+              <button className="scroll-btn left" onClick={scrollLeft}>
+                <MdOutlineArrowLeft size={25} />
+              </button>
+            )}
+
+            <div className="dept-categories-scroll" ref={scrollRef}>
+              {deptCategories.map((cat, i) => {
+                const isSelected = cat._id === categoryId;
+                return (
+                  <CategoryCard2
+                    ref={isSelected ? scrollRefTop : null}
+                    isSelected={isSelected}
+                    key={i}
+                    image={"https://api.delcofarmersmarket.com" + cat.image}
+                    catName={cat.name}
+                    onClick={() => {
+                      setPage(1);
+                      router.push(`/category/${cat._id}?page=1`, { scroll: false });
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {canScrollRight && (
+              <button className="scroll-btn right" onClick={scrollRight}>
+                <MdOutlineArrowRight size={25} />
+              </button>
+            )}
+
+          </div>
+
+
+        )}
+        {cart.length === 0 && <span className="next-aisle-btn">
+          Next Aisle <HiArrowNarrowRight />
+        </span>}
+      </div>
+      <div className="archive_product_section">
+        {/* ---------- LEFT FILTERS ---------- */}
+        <div className="left_side_filters">
+          <div className="filter_section_header">
+            <h2>Filters</h2>
+            <div className="close_btn_filter">
+              {/* <FaArrowLeftLong size={20} /> */}
+            </div>
+          </div>
+
+          <AccordionFilter title="Price Range">
+            <div className="filter_block">
+              <PriceRangeSlider min={10} max={100} />
+            </div>
+          </AccordionFilter>
+
+          <AccordionFilter title="Brand">
+            <div className="filter_block">
+              <div className="filter_body">
+                {brands.map((item, i) => (
+                  <CheckboxOpt2 key={i} label={item} />
+                ))}
+              </div>
+            </div>
+          </AccordionFilter>
+
+          <AccordionFilter title="Mode">
+            <div className="filter_block">
+              <div className="filter_body">
+                {modes.map((item, i) => (
+                  <CheckboxOpt2 key={i} label={item.name} id={item.id} />
+                ))}
+              </div>
+            </div>
+          </AccordionFilter>
+        </div>
+
+        {/* ---------- RIGHT PRODUCTS GRID ---------- */}
+        <div className="right_side_products" >
+          <div className="right_side_products_header">
+            <div className="heading_rsph">
+              <h2>{totalProducts} Products Found</h2>
+              <p>Starting From $5</p>
+            </div>
+            <SortDropdown options={sortOptions} />
+          </div>
+
+
+          {loading ? (
+
+            <div className="product_grid">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <ShimmerProductCard key={i} isArchivePage={true} />
+              ))}
+            </div>
+
+          ) : products.length > 0 ? (
+            <div className="product_grid">
+              {products.map((product, i) => (
+                <ProductCard isArchivePage={true} key={i} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="no_products">No products found</div>
+          )}
+
+          <Pagination
+            prevPage={prevPage}
+            page={page}
+            totalPages={totalPages}
+            nextPage={nextPage}
+            goToPage={(num) => setPage(num)}
+          />
+        </div>
+      </div>
+
+    </div>
+  );
+}

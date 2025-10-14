@@ -11,9 +11,9 @@ import { IoIosArrowForward } from "react-icons/io";
 export default function MainSlider() {
     const slides = [
 
-        { id: 1, color: "#FE6463", heading: "Premium Deli Beef", paragraph: "Tender, flavorful cuts—perfect for sandwiches, wraps & everyday meals.", btnText: "Shop Deli Beef", image: "./slider/beef.png" },
-        { id: 2, color: "#50274B", heading: "Authentic Italian Flavors", paragraph: "Prosciutto, salami, and artisanal cured meats—crafted for true taste lovers.", btnText: "Shop Italian Meats", image: "./slider/salami.png" },
-        { id: 3, color: "#5C0002", heading: "Fresh & Lean Turkey", paragraph: "Sliced to perfection—your go-to choice for light and healthy meals.", btnText: "Shop Turkey", image: "./slider/turkey.png" }
+        { id: 1, color: "#FE6463", heading: "Fresh, All-Natural Chicken", paragraph: "Raised responsibly, cut-to-order — juicy, clean flavor you can trust.", btnText: "Shop Chicken", image: "./slider/chicken.png" },
+        { id: 2, color: "#50274B", heading: "Artisan Sausages", paragraph: "Made in-house with premium spices — bold, flavorful, perfect for grill or skillet.", btnText: "Shop Sausage", image: "./slider/sausage.png" },
+        { id: 3, color: "#5C0002", heading: "Premium Beef Cuts", paragraph: "From steaks to roasts — tender, richly marbled, and butcher-selected for quality.", btnText: "Shop Beef", image: "./slider/beef.png" }
     ];
 
     const [current, setCurrent] = useState(0);

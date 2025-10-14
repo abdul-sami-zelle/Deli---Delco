@@ -137,13 +137,13 @@
 .product-price .price-int {
   font-size: 21px;
   font-weight: 500;
-  color: #0f1111;
+  color: var(--charcoal);
 }
 
 .product-price .price-dec {
   font-size: 12px;
   margin-top: 2px;
-  color: #0f1111;
+  color: var(--charcoal);
 }
 .shimmer-card {
   background: #f6f7f8;

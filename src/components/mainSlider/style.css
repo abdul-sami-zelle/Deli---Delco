@@ -1,8 +1,7 @@
 .main_slider {
-    width: 100%;
-    max-width: 1380px;
     overflow: hidden;
-    margin: 30px auto 0 auto;
+    margin: var(--section-gap) auto;
+    max-width: var(--max-width--global);
 }
 .slides_main_slider {
   position: relative;   /* stacked slides */
@@ -47,7 +46,7 @@
     gap: 10px;
     padding-left: 120px;
     padding-right: 52px;
-    max-width: 450px;
+    max-width: 40%;
 }
 
 .main_slider_content_left h2 {
@@ -75,11 +74,12 @@
     border: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
+    color: var(--charcoal);
 }
 
 
 .dots_btn_main_slider {
-    background-color: #fff;
+    background-color: var(--color-gray--30);
     border: none;
     border-radius: 10px;
     height: 16px;
@@ -140,6 +140,7 @@
   cursor: pointer;
   font-size: 28px;
   color: var(--primary);
+  color: var(--charcoal);
 }
 
 .arrow_main_slider.left {
