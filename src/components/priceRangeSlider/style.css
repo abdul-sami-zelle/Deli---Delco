@@ -1,0 +1,116 @@
+.prs-container {
+  width: 100%;
+  max-width: 480px;
+  gap: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prs-values {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.prs-value { 
+    font-size: 14px;
+    color: #1c1c1ca6;
+    font-weight: 500;
+ }
+
+.prs-slider-wrapper {
+  position: relative;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+/* common styles for both range inputs */
+.prs-range {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 36px;
+  margin: 0;
+  pointer-events: none; /* allow only thumbs to be interactive */
+  background: transparent;
+}
+
+/* make thumb interactive while leaving track pointer-events none */
+.prs-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--dark-medium-green);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+  margin-top: -6px; /* center thumb on track */
+}
+.prs-range::-moz-range-thumb {
+  pointer-events: auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--dark-medium-green);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/* hide default track visuals (we use our custom track) */
+.prs-range::-webkit-slider-runnable-track {
+  height: 8px;
+  background: transparent;
+  border: none;
+}
+.prs-range::-moz-range-track {
+  height: 8px;
+  background: transparent;
+  border: none;
+}
+
+/* The track container (background) */
+.prs-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 999px;
+  background: #e6e9ee; /* base track color */
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: visible;
+}
+
+/* Active range between thumbs */
+.prs-track-active {
+  position: absolute;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--dark-medium-green);
+}
+
+/* Buttons */
+.prs-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.prs-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.prs-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }

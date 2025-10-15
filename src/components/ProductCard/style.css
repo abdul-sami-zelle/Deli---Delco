@@ -119,7 +119,13 @@
   cursor: pointer;
   font-weight: 500;
   line-height: 0;
+  color: white;
 }
+
+.add-to-cart.others:hover button{
+  color: var(--peace);
+}
+
 .add-to-cart span {
   text-align: center;
   font-size: 15px;

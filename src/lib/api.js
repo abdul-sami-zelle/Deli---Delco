@@ -143,3 +143,45 @@ export async function getHeaderDepartments() {
   }
 }
 
+
+
+export async function getCategoryProductsData(limit,page,id) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/v1/products/get?category=${id}&page=${page}&limit=${limit}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch product data");
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("API Error:", err);
+    return null;
+  }
+}
+
+
+export async function getDeptCategories(id) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/v1/categories/get?department=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch product data");
+
+    const data = await res.json();
+    return data.data;
+  } catch (err) {
+    console.error("API Error:", err);
+    return null;
+  }
+}

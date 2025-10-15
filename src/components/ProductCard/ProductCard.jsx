@@ -13,6 +13,7 @@ export default function ProductCard({
   allProducts = [],
   handleShowDetailModal,
   disableModal = false,
+  isArchivePage = false
 }) {
   const {
     addToCart,
@@ -71,7 +72,10 @@ export default function ProductCard({
   return (
     <>
       <div className="product-card-container">
-        <div className="product-card">
+        <div className="product-card" style={{
+          padding: isArchivePage && "5px",
+          width: isArchivePage && "100%"
+        }}>
           <div className="product-card-inner">
             <img
               src={`${BASE_URL}${product?.image}`}
@@ -92,14 +96,13 @@ export default function ProductCard({
                   )}
                 </p>
               )}
-              <h4 className="name"
-              //  onClick={handleNameClick}
-               >
+              <h4 className="name" 
+              // onClick={handleNameClick}
+              >
                 {product.title}
               </h4>
             </div>
           </div>
-
           {/* 🔥 Add to Cart button with qty control */}
           {!item ? (
             loadingProduct === product._id ? (

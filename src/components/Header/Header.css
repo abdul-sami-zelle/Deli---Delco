@@ -491,6 +491,10 @@
   transition: all 0.2s;
 }
 
+.sub-header-right-buttons .active{
+  background-color: red;
+}
+
 .sub-header-right-buttons button span {
   display: flex;
   align-items: center;

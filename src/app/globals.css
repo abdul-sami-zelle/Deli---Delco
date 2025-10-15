@@ -157,6 +157,30 @@ body {
   --color-gray--20: #e8e8e8;
   --color-gray--10: #f5f5f5;
 
-  --max-width--global : 92%;
-  --section-gap:20px;
+  --max-width--global: 92%;
+  --section-gap: 20px;
+
+
+  --shimmer-base: #F8F8F9;
+  --shimmer-highlight: #ececec;
+  --shimmer-dark: #e0e0e0;
+  --shimmer-duration: 3s;
+  --br: 8px;
+}
+
+
+.loader {
+  width: 28px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, var(--dark-medium-green) 94%, #0000) top/5px 5px no-repeat,
+    conic-gradient(#0000 30%, var(--dark-medium-green));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 5px), #000 0);
+  animation: l13 1s infinite linear;
+}
+
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
 }

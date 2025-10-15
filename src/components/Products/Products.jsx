@@ -15,8 +15,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 import ProductDetailModal from "../ProductDetailModal/ProductDetailModal";
 import ProductCard from "../ProductCard/ProductCard";
 import Departments2 from "../Department2/departments";
+import Link from "next/link";
 
-const Products = ({ scrollToSection , onClick }) => {
+const Products = ({ scrollToSection, onClick }) => {
+
+
+
   const [sections, setSections] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -141,7 +145,7 @@ const Products = ({ scrollToSection , onClick }) => {
                 <div className="products-header">
                   <span>{section.sec_name}</span>
                   <p>
-                    See more <FaChevronRight  size={12} />
+                    <Link href={`/category/${section?.categories[0]._id}`}> See more <FaChevronRight size={12} /></Link>
                   </p>
                 </div>
                 <span className="horizontal-line"></span>
@@ -161,7 +165,7 @@ const Products = ({ scrollToSection , onClick }) => {
                     {section.products.map((product) => {
                       const item = getCartItem(product._id);
                       return (
-                        <div key={product?._id} onClick={() => handleProductClick(product)}>
+                        <div key={product?._id} onClick={() => { handleProductClick(product) }}>
                           <ProductCard product={product} allProducts={section?.products} />
 
                         </div>

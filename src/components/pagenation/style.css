@@ -1,0 +1,58 @@
+.pagenation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    gap: 15px;
+    background-color: transparent;
+    padding: 8px 8px;
+    border-radius: 4px;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    width: fit-content;
+}
+
+.page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pg_nmbr {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    color: var(--dark-medium-green);
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pg_nmbr.active {
+    background-color: var(--dark-medium-green);
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 2px 12px;
+}
+
+.arrow_btn {
+    border: none;
+    background: transparent;
+    color: var(--dark-medium-green);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow_btn:disabled {
+    /* color: transparent; */
+    cursor: not-allowed;
+}

@@ -75,9 +75,15 @@
   line-height: 20px;
   color: var(--charcoal);
   cursor: pointer;
+  text-decoration: none;
 }
 
-.products-header:hover p {
+.products-header p a{
+  text-decoration: none;
+    color: var(--charcoal);
+}
+
+.products-header:hover a{
   color: var(--peace);
 }
 
