@@ -8,28 +8,19 @@ import MoreProducts from "../components/MoreProducts/MoreProducts";
 import SaleProducts from "../components/SaleProducts/SaleProducts";
 import HeroSection from "../components/HeroSection/HeroSection";
 import SideCart from "../components/SideCart/SideCart";
-import Footer from "../components/Footer/Footer";
 import { getSalesProductData } from "../lib/api";
 import DepartmentCard from "../components/DepartmentCard/DepartmentCard";
 import HeroSection2 from "@/components/HeroSection2/HeroSection";
 import Departments2 from "@/components/Department2/departments";
 import FtBanner from "@/components/footerBanner/ftBanner";
 import MainSlider from "@/components/mainSlider/mainSlider";
+import Footer_2 from "@/components/footer_2/footer";
 
 export default function Home() {
   const [saleBgColor, setSaleBgColor] = useState("");
   const [scrollToSection, setScrollToSection] = useState(null);
   const [scrollToSectionSale, setScrollToSectionSale] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getSalesProductData();
-  //     if (data?.color) {
-  //       setSaleBgColor(data.color);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
 
   return (
     <>
@@ -47,10 +38,10 @@ export default function Home() {
           </div>
           <FtBanner />
 
-          <Footer />
         </div>
         <SideCart />
       </div>
+      <Footer_2/>
     </>
   );
 }

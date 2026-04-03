@@ -284,3 +284,31 @@
     right: -45px;
   }
 }
+
+
+.depts_mob{
+  display: none;
+}
+
+.depts_des{
+  display: block;
+}
+
+
+@media (max-width: 767px) {
+  .depts_mob{
+  display: block;
+}
+
+.depts_des{
+  display: none;
+}
+
+.products-header span {
+  font-size: 19px;
+  line-height: 21px;
+}
+
+}
+
+

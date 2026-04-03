@@ -12,8 +12,12 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { getSalesProductData, getCategories, getHeaderDepartments } from "@/lib/api";
 import LocationModal from "../LocationModal/LocationModal";
 import DeliveryModal from "../DeliveryModal/DeliveryModal";
+import ComingSoonPopup from "../comingSoon/comingSoon";
+
+import { useRouter } from "next/navigation";
 
 export default function Header({ onDeptClick, onDiscountClick }) {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showDelcoMenu, setShowDelcoMenu] = useState(false);
@@ -129,6 +133,23 @@ export default function Header({ onDeptClick, onDiscountClick }) {
     getDicounts();
     fetchHeaderDepts();
   }, []);
+
+
+  const [showSidebarDepts, setShowSidebarDepts] = useState(false);
+  const [showSidebarAisles, setShowSidebarAisles] = useState(true);
+  const [showSidebarDiscounts, setShowSidebarDiscounts] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <header className="header">
@@ -150,7 +171,12 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               }} href="https://delcofarmersmarket.com">
                 <img
                   src="/assets/Images/header-logo.png"
-                  className="header-logo"
+                  className="header-logo desktop"
+                  alt="Delco Farmers Market"
+                />
+                <img
+                  src="/assets/Images/header-logo2.png"
+                  className="header-logo mobile"
                   alt="Delco Farmers Market"
                 />
               </a>
@@ -158,11 +184,11 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               <div className="search-container">
                 <span
                   className="delco-fresh-btn"
-                  onClick={() => setShowDelcoMenu((prev) => !prev)}
+                  onClick={() => { }}
                 >
                   {selectedCategory} <IoMdArrowDropdown />
                 </span>
-                <input type="text" placeholder="Delco Search" />
+                <input readOnlys type="text" placeholder="Delco Search" />
                 <span className="search-icon">
                   <IoSearch size={20} />
                 </span>
@@ -186,12 +212,12 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               </div>
             </div>
             <div className="topbar-right">
-              <RiAccountCircleLine size={30} color="#ffff" />
+              <RiAccountCircleLine onClick={() => { setIsOpen(true) }} size={30} color="#ffff" />
               {!showSideCart && (
                 <MdOutlineShoppingCart
                   size={30}
                   color="#fff"
-                  onClick={() => setShowSideCart(true)}
+                  onClick={() => { setIsOpen(true) }}
                 />
               )}
             </div>
@@ -268,45 +294,127 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                 <h2>Delco Farmers Market</h2>
               </div>
 
-              <div className="sidebar-links">
-                <p
-                  onClick={() => {
-                    setShowSidebar(false);
-                    setShowModal(true);
-                  }}
+
+
+
+              <div className="sidebar-dropdown">
+                <div
+                  className="sidebar-dropdown-header"
+                  onClick={() => setShowSidebarAisles((prev) => !prev)}
                 >
-                  Store Info
-                </p>
-                <p className="delivery">
-                  <span>
-                    <LiaTruckMovingSolid className="truck-icon" />
-                  </span>
-                  <span> Delivery</span>United States
-                  <span className="down-icon">
-                    <MdKeyboardArrowDown />
-                  </span>
-                </p>
+                  <span>Aisles</span>
+                  <IoMdArrowDropdown
+                    className={showSidebarAisles ? "rotate" : ""}
+                  />
+                </div>
+
+                {showSidebarAisles && (
+                  <div className="sidebar-dropdown-content">
+                    {departments.map((dept) => (
+                      <div
+                        key={dept._id}
+                        className="sidebar-dept-item"
+                        onClick={() => {
+                          setShowSidebar(false);
+                          onDeptClick(dept._id); // SAME as header
+                        }}
+                      >
+                        <img
+                          src={`https://api.delcofarmersmarket.com${dept.image}`}
+                          alt={dept.name}
+                        />
+                        <span>{dept.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <hr />
+
+              <div className="sidebar-dropdown">
+                <div
+                  className="sidebar-dropdown-header"
+                  onClick={() => setShowSidebarDiscounts((prev) => !prev)}
+                >
+                  <span>Discounts</span>
+                  <IoMdArrowDropdown
+                    className={showSidebarDiscounts ? "rotate" : ""}
+                  />
+                </div>
+
+                {showSidebarDiscounts && (
+                  <div className="sidebar-dropdown-content">
+                    {discounts.map((dis) => (
+                      <div
+                        key={dis._id}
+                        className="sidebar-dept-item"
+                        onClick={() => {
+                          setShowSidebar(false);
+                          onDiscountClick(dis.sec_name)
+                        }}
+                      >
+                        <span style={{color:"var(--peace)"}}>{dis.sec_name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+
+              <div className="sidebar-dropdown">
+                <div
+                  className="sidebar-dropdown-header"
+                  onClick={() => setShowSidebarDepts((prev) => !prev)}
+                >
+                  <span>Departments</span>
+                  <IoMdArrowDropdown
+                    className={showSidebarDepts ? "rotate" : ""}
+                  />
+                </div>
+
+                {showSidebarDepts && (
+                  <div className="sidebar-dropdown-content">
+                    {headerDepts?.map((dept) => (
+                      <div
+                        key={dept._id}
+                        className="sidebar-dept-item"
+                        onClick={() => {
+                          setShowSidebar(false);
+                          window.location.href = dept.url;
+                        }}
+                      >
+                        <img
+                          src={`https://api.delcofarmersmarket.com${dept.image}`}
+                          alt={dept.name}
+                        />
+                        <span>{dept.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+
+
 
               <div className="sidebar-actions">
-                <button className="btn sign-in">Sign Up</button>
-                <button className="btn cart">Sign In</button>
+                <button onClick={() => { setIsOpen(true) }} className="btn sign-in">Sign Up</button>
+                <button onClick={() => { setIsOpen(true) }} className="btn cart">Sign In</button>
               </div>
             </div>
           </div>
         )}
       </header>
+
       <div className="sub-header">
         <div className="sub-header-container">
-          <div className="sub-header-logo-container dropdown">
+          <div onClick={() => router.push("/")} className="sub-header-logo-container dropdown">
             <img
               src="/assets/Images/edit-logo.png"
               className="sub-header-logo"
               alt=""
             />
-            <MdKeyboardArrowDown size={20} />
+            {/* <MdKeyboardArrowDown size={20} />
 
             <div className="dropdown-menu">
               <ul>
@@ -317,7 +425,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                 <li>Grocery Subscription</li>
                 <li>Prime Savings</li>
               </ul>
-            </div>
+            </div> */}
           </div>
 
           <span style={{ color: "lightgray", fontSize: "20px" }}>|</span>
@@ -342,18 +450,6 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                       ))}
                     </ul>
                   </div>
-                  {/* <div className="" style={{ flex: 1 }}>
-                    <ul>
-                      <span>Trending</span>
-                      {trendDepartments.map((dept) => (
-                        <li key={dept._id} onClick={() => {
-                          onDeptClick(dept._id);   // parent ko inform karega
-                        }}>
-                          {dept.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -367,12 +463,9 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                 <div
                   className="explore-container"
                   style={{
-                    display: departments.length < 10 ? "block" : "grid",
-                    gridTemplateColumns:
-                      departments.length < 10
-                        ? "none"
-                        : "repeat(auto-fill, minmax(200px, 1fr))", // grid only when 10+
-                    gap: departments.length < 10 ? "0" : "20px",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", // responsive columns
+                    gap: "20px",
                     maxHeight: "600px",
                     overflowY: "auto",
                     paddingRight: "10px",
@@ -386,15 +479,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                       return rows;
                     }, [])
                     .map((group, i) => (
-                      <ul
-                        key={i}
-                        style={{
-                          listStyle: "none",
-                          padding: 0,
-                          margin: 0,
-                          width: departments.length < 10 ? "100%" : "auto", // full width when less than 10
-                        }}
-                      >
+                      <ul key={i} style={{ listStyle: "none", padding: 0 }}>
                         {group.map((dept) => (
                           <li
                             key={dept._id}
@@ -405,8 +490,8 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                               padding: "8px 12px",
                               cursor: "pointer",
                               fontSize: "var(--fs-14)",
-                              fontWeight: "var(--fw-400)",
-                              width: departments.length < 10 ? "100%" : "auto",
+                              fontWeight: "var(--fw-400)"
+                              // borderBottom: "1px solid #f0f0f0",
                             }}
                           >
                             <img
@@ -425,9 +510,10 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                       </ul>
                     ))}
                 </div>
-              </div>
 
+              </div>
             </div>
+
 
             <div className="dropdown">
               <a href="#">
@@ -447,45 +533,33 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               </div>
             </div>
 
-            <div className="dropdown">
-              <a href="#">
-                Explore <MdKeyboardArrowDown size={13} />
-              </a>
-              <div className="dropdown-menu">
-                <div className="explore-container">
-                  <div className="">
-                    <ul>
-                      <span>Discover</span>
-                      <li>Emerging Brands</li>
-                      <li>Recipes</li>
-                      <li>Shop EBT</li>
-                      <li>Shop by diet</li>
-                      <li>Climate Pledge Friendly</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <ul>
-                      <span>Trending</span>
-                      <li>New to Fresh</li>
-                      <li>New Arrivals</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <span style={{ color: "lightgray", fontSize: "20px" }}>|</span>
-            <a href="#">Black Friday</a>
-
-            {/* <a href="#">Past Purchases</a> */}
-            {/* <a href="#">Repeat Items</a> */}
           </div>
 
           <div className="sub-header-right">
+            <div className="location">
+              <span>
+                1850 Delmar drive, Folcroft, PA
+                {/* <span className="down-icon">
+                  <MdKeyboardArrowDown />
+                </span> */}
+              </span>
+            </div>
             <div className="sub-header-right-buttons">
               <button
+                className={"active"}
+                onClick={() => setActiveModal("pickup")}
+              >
+                <span>
+                  <img src="/assets/Icons/store.png" alt="pickup" />
+                </span>{" "}
+                Pickup
+              </button>
+
+
+              <button
                 className={activeModal === "delivery" ? "active" : ""}
-                onClick={() => setActiveModal("delivery")}
+                onClick={() => { setIsOpen(true) }}
               >
                 <span>
                   <LiaTruckMovingSolid className="truck-icon" />
@@ -493,36 +567,23 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                 Delivery
               </button>
 
-              <button
-                className={activeModal === "pickup" ? "active" : ""}
-                onClick={() => setActiveModal("pickup")}
-              >
-                <span>
-                  <img src="/assets/Icons/pickup.svg" alt="pickup" />
-                </span>{" "}
-                Pickup
-              </button>
+
             </div>
 
-            <div className="location">
-              Delivery to:{" "}
-              <span>
-                Council Bluffs, PA{" "}
-                <span className="down-icon">
-                  <MdKeyboardArrowDown />
-                </span>
-              </span>
-            </div>
+
           </div>
         </div>
         <div className="overlay"></div>
       </div>
+
       {activeModal === "delivery" && (
         <DeliveryModal onClose={() => setActiveModal(null)} />
       )}
       {activeModal === "pickup" && (
         <LocationModal onClose={() => setActiveModal(null)} />
       )}
+
+      <ComingSoonPopup isOpen={isOpen} onClose={() => { setIsOpen(false) }} />
     </>
   );
 }

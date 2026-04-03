@@ -373,3 +373,121 @@
   font-weight: 400;
   line-height: 14px;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1300px) {
+  .category-header{
+    margin-bottom: 30px;
+    position: relative;
+    flex-direction: column;
+    align-items: start;
+  }
+  .next-aisle-btn{
+    position: absolute;
+    right: 0;
+    top: 25px;
+  }
+  .dept-categories-wrapper{
+    width: 100%;
+    margin: 10px 25px;
+  }
+  .left_side_filters{
+    display: none;
+  }
+  .right_side_products{
+    width: 100%;
+  }
+  .archive_product_section{
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .scroll-btn{
+    display: none;
+  }
+  .product_grid > div > .product-card-container > .product-card{
+    width: 100% !important;
+  }
+   .main_category_page{
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 450px) {
+   .product_grid{
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 444px) {
+  .product_grid{
+   grid-template-columns: repeat(1, 1fr);
+  }
+  .product_grid.two{
+   grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-toggle{
+    display: flex !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .sort_dropdown_wrapper{
+    display: none !important;
+  }
+  .main_category_page{
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .product_grid > div > .product-card-container{
+    width: 100% !important;
+  }
+   .category-header{
+    margin: 15px 0;
+    position: relative;
+    flex-direction: column;
+    align-items: start;
+  }
+  .next-aisle-btn{
+    position: absolute;
+    right: 0;
+    top: 0px;
+    margin-right: 0;
+    color: var(--dark-medium-green);
+    border: 1.5px solid var(--dark-medium-green);
+    background-color: transparent;
+  }
+  .dept-categories-wrapper{
+    width: 100%;
+    /* margin: 10px 25px; */
+    margin: 25px 0 15px 0;
+    box-sizing: border-box;
+  }
+  .left_side_filters{
+    display: none;
+  }
+
+  .category-Image-with-name{
+    padding: 0;
+  }
+  .category-Image-with-name img{
+    height: 30px;
+    width: 30px;
+  }
+  .category-Image-with-name span{
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .product_grid{
+    /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+  }
+   .right_side_products{
+    width: 100%;
+  }
+   .archive_product_section{
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .scroll-btn{
+    display: none;
+  }
+}

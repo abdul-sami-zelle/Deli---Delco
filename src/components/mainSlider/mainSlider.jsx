@@ -15,7 +15,7 @@ export default function MainSlider() {
         { id: 2, color: "#50274B", heading: "Authentic Italian Flavors", paragraph: "Prosciutto, salami, and artisanal cured meats—crafted for true taste lovers.", btnText: "Shop Italian Meats", image: "./slider/salami.png" },
         { id: 3, color: "#5C0002", heading: "Fresh & Lean Turkey", paragraph: "Sliced to perfection—your go-to choice for light and healthy meals.", btnText: "Shop Turkey", image: "./slider/turkey.png" }
     ];
-    const [current, setCurrent] = useState(0);
+     const [current, setCurrent] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const sliderRef = useRef(null);
     const intervalRef = useRef(null);
@@ -86,6 +86,8 @@ export default function MainSlider() {
                             style={{ backgroundImage: `url(${slide.image})` }}
                             className="main_slider_content_right"
                         />
+
+                        <img className="main_slider_content_right_image_mob" src={slide.image} alt="" />
                     </div>
                 ))}
             </div>

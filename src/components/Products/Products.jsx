@@ -16,6 +16,8 @@ import ProductDetailModal from "../ProductDetailModal/ProductDetailModal";
 import ProductCard from "../ProductCard/ProductCard";
 import Departments2 from "../Department2/departments";
 import Link from "next/link";
+import Departments3 from "../Department2/departments2";
+import ComingSoonPopup from "../comingSoon/comingSoon";
 
 const Products = ({ scrollToSection, onClick }) => {
 
@@ -95,7 +97,8 @@ const Products = ({ scrollToSection, onClick }) => {
 
   return (
     <div>
-      {departments.length > 0 && <Departments2 departments={departments} onClick={onClick} />}
+      {departments.length > 0 && <div className="depts_mob"><Departments3 departments={departments} onClick={onClick} /></div>}
+      {departments.length > 0 && <div className="depts_des"><Departments2 departments={departments} onClick={onClick} /></div>}
       <div className="main-bg">
         <div className="products-container">
           {loading
@@ -183,13 +186,7 @@ const Products = ({ scrollToSection, onClick }) => {
               </div>
             ))}
           {showModal && selectedProduct && (
-            <ProductDetailModal
-              product={selectedProduct}
-              onClose={(newProduct) => {
-                newProduct ? handleProductClick(newProduct) : setShowModal(false);
-              }}
-              allProducts={similarProducts}
-            />
+            <ComingSoonPopup isOpen={showModal} onClose={()=>{setShowModal(false)}}/>
           )}
         </div>
       </div>

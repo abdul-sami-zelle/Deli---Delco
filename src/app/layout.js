@@ -56,7 +56,9 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} ${balooBhai.variable} ${poppins.variable}`}>
         <CartProvider>
           <LoaderWrapper>
-            <main className="site-main">{children}</main>
+            <main className="site-main">
+              {children}
+              </main>
           </LoaderWrapper>
         </CartProvider>
       </body>
