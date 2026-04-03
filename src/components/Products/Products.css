@@ -275,12 +275,36 @@
     opacity: 1;
   }
 }
-@media (max-width: 1550px) {
-  .arrow-btn.left {
-    left: -45px;
-  }
 
-  .arrow-btn.right {
-    right: -45px;
-  }
+
+@media (max-width: 767px) {
+    .arrow-btn.right {
+        right: -10px;
+    }
+}
+
+
+.depts_mob{
+  display: none;
+}
+
+.depts_des{
+  display: block;
+}
+
+
+@media (max-width: 767px) {
+  .depts_mob{
+  display: block;
+}
+
+.depts_des{
+  display: none;
+}
+
+.products-header span {
+  font-size: 19px;
+  line-height: 21px;
+}
+
 }

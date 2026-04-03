@@ -15,8 +15,7 @@ export default function MainSlider() {
         { id: 2, color: "#50274B", heading: "Artisan Sausages", paragraph: "Made in-house with premium spices — bold, flavorful, perfect for grill or skillet.", btnText: "Shop Sausage", image: "./slider/sausage.png" },
         { id: 3, color: "#5C0002", heading: "Premium Beef Cuts", paragraph: "From steaks to roasts — tender, richly marbled, and butcher-selected for quality.", btnText: "Shop Beef", image: "./slider/beef.png" }
     ];
-
-    const [current, setCurrent] = useState(0);
+   const [current, setCurrent] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const sliderRef = useRef(null);
     const intervalRef = useRef(null);
@@ -87,6 +86,8 @@ export default function MainSlider() {
                             style={{ backgroundImage: `url(${slide.image})` }}
                             className="main_slider_content_right"
                         />
+
+                        <img className="main_slider_content_right_image_mob" src={slide.image} alt="" />
                     </div>
                 ))}
             </div>

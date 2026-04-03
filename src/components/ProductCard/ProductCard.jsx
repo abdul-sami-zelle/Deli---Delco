@@ -13,7 +13,7 @@ export default function ProductCard({
   allProducts = [],
   handleShowDetailModal,
   disableModal = false,
-  isArchivePage = false
+  onClickProduct
 }) {
   const {
     addToCart,
@@ -32,51 +32,30 @@ export default function ProductCard({
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   const item = cart.find((itm) => itm._id === product._id);
 
-  const handleImageClick = (e) => {
-    e.stopPropagation();
-
-    if (disableModal) {
-      router.push(`/product/${product.slug}`);
-      return;
-    }
-
-    if (isMobile) {
-      router.push(`/product/${product.slug}`);
-    } else {
-      if (handleShowDetailModal) {
-        handleShowDetailModal(product, allProducts);
-      } else {
-        setShowDetailModal(true);
-      }
-    }
-  };
 
   const handleNameClick = (e) => {
     e.stopPropagation();
     router.push(`/product/${product.slug}`);
   };
 
-  useEffect(() => {
-    if (showDetailModal) {
-      const filtered = allProducts
-        .filter((itm) => itm._id !== product._id)
-        .slice(0, 4);
+  // useEffect(() => {
+  //   if (showDetailModal) {
+  //     const filtered = allProducts
+  //       .filter((itm) => itm._id !== product._id)
+  //       .slice(0, 4);
 
-      setFilteredProducts(filtered);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [showDetailModal, allProducts, product._id]);
+  //     setFilteredProducts(filtered);
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [showDetailModal, allProducts, product._id]);
 
   return (
     <>
-      <div className="product-card-container">
-        <div className="product-card" style={{
-          padding: isArchivePage && "5px",
-          width: isArchivePage && "100%"
-        }}>
-          <div className="product-card-inner">
+      <div className="product-card-container" >
+        <div className="product-card" >
+          <div  className="product-card-inner">
             <img
               src={`${BASE_URL}${product?.image}`}
               alt={product.title}
@@ -84,20 +63,7 @@ export default function ProductCard({
             />
 
             <div className="product-info">
-              {!product.hidePrice && (
-                <p className="price">
-                  {product.currency}
-                  {product.price.toFixed(2)}
-                  {product.mode === "weight" && (
-                    <span className="lb">
-                      / {product.volume}
-                      {product.volumeUnits}
-                    </span>
-                  )}
-                </p>
-              )}
-              <h4 className="name" 
-              // onClick={handleNameClick}
+              <h4 className="name"
               >
                 {product.title}
               </h4>
@@ -112,21 +78,22 @@ export default function ProductCard({
               <button
                 className="add-to-cart"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setLoadingProduct(product._id);
-                  setTimeout(() => {
-                    addToCart(
-                      {
-                        ...product,
-                        _id: product._id,
-                        image: `${BASE_URL}${product.image}`,
-                      },
-                      product.quantityInitial || 1
-                    );
-                    setShowSideCart(true);
-                    setLoadingProduct(null);
-                  }, 800);
-                }}
+                  // e.stopPropagation();
+                  // setLoadingProduct(product._id);
+                  // setTimeout(() => {
+                  //   addToCart(
+                  //     {
+                  //       ...product,
+                  //       _id: product._id,
+                  //       image: `${BASE_URL}${product.image}`,
+                  //     },
+                  //     product.quantityInitial || 1
+                  //   );
+                  //   setShowSideCart(true);
+                  //   setLoadingProduct(null);
+                  // }, 800);
+                }
+              }
               >
                 Add to Cart
               </button>
@@ -172,14 +139,14 @@ export default function ProductCard({
         </div>
       </div>
 
-      {!disableModal && showDetailModal && (
+      {/* {!disableModal && showDetailModal && (
         <ProductDetailModal
           showModal={showDetailModal}
           setShowModal={setShowDetailModal}
           productData={product}
           otherProducts={filteredProducts}
         />
-      )}
+      )} */}
     </>
   );
 }

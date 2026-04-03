@@ -14,6 +14,7 @@ import {
 import { CartContext } from "../../context/addToCart";
 import ProductDetailModal from "../ProductDetailModal/ProductDetailModal";
 import ProductCard from "../ProductCard/ProductCard";
+import ComingSoonPopup from "../comingSoon/comingSoon";
 
 const SaleProducts = ({ scrollToSection }) => {
   const [container, setContainer] = useState(null);
@@ -100,13 +101,6 @@ const SaleProducts = ({ scrollToSection }) => {
   return (
     <div
       className="sales-products-container"
-      // style={{
-      //   backgroundColor: container?.bgColor
-      //     ? container.bgColor.startsWith("#")
-      //       ? container.bgColor
-      //       : `#${container.bgColor}`
-      //     : "transparent",
-      // }}
     >
       {sections?.map((section, index) => {
         const sectionImage = section?.image
@@ -176,7 +170,7 @@ const SaleProducts = ({ scrollToSection }) => {
 
                           return (
 
-                            <div key={item?._id} onClick={()=>{handleProductClick(item)}}>
+                            <div key={item?._id} onClick={() => handleProductClick(item)}>
                               <ProductCard product={item} allProducts={section?.products} />
                             </div>
                           );
@@ -199,12 +193,9 @@ const SaleProducts = ({ scrollToSection }) => {
       })}
 
       {showModal && selectedProduct && (
-        <ProductDetailModal
-          product={selectedProduct}
-          onClose={(newProduct) => {
-            newProduct ? handleProductClick(newProduct) : setShowModal(false);
-          }}
-          allProducts={similarProducts}
+        <ComingSoonPopup
+           isOpen={showModal}
+           onClose={()=>{setShowModal(false)}}
         />
       )}
     </div>

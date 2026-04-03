@@ -3,9 +3,11 @@ import Header from "@/components/Header/Header";
 import { getDeptCategories } from "@/lib/api";
 import React from "react";
 import SideCart from "@/components/SideCart/SideCart";
+import Footer_2 from "@/components/footer_2/footer";
+import FtBanner from "@/components/footerBanner/ftBanner";
 
 export default async function Page({ params, searchParams }) {
-  // 🧠 Server-side fetch (runs before render)
+  // ­ЪДа Server-side fetch (runs before render)
   const deptCategories = await getDeptCategories("68b5adf44ecbd3f008330c1a");
 
   return (
@@ -18,7 +20,10 @@ export default async function Page({ params, searchParams }) {
             <Category deptCategories={deptCategories} />
             <SideCart/>
         </div>
+        
       </div>
+      
+      <Footer_2/>
     </div>
   );
 }

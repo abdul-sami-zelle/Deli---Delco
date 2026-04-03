@@ -55,9 +55,8 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     font-size: 16px;
     transition: all 0.3s;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    z-index: 999;
     transition: all 0.3s;
-    z-index: 9999 !important;  
+    z-index: 999 !important;  
     &:hover{
         background: #4B5320;
     }

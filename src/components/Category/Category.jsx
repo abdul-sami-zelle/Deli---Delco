@@ -19,6 +19,8 @@ import { CartContext } from "../../context/addToCart";
 import CategoryCard2 from "../categoryCard2/categoryCard2";
 import SortDropdown from "../customDropdown/customDropDown";
 import SideCart from "../SideCart/SideCart";
+import GridToggle from "../gridToggle/gridToggle";
+import ComingSoonPopup from "../comingSoon/comingSoon";
 
 export default function Category({ deptCategories }) {
   const router = useRouter();
@@ -160,9 +162,34 @@ export default function Category({ deptCategories }) {
   }, [deptCategories]);
 
 
+  const [activeView, setActiveView] = useState(1);
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleNextAisle = () => {
+    if (!deptCategories || deptCategories.length === 0) return;
+
+    const currentIndex = deptCategories.findIndex(
+      (cat) => cat._id === categoryId
+    );
+
+    const nextIndex =
+      currentIndex === -1
+        ? 0
+        : (currentIndex + 1) % deptCategories.length;
+
+    const nextCategory = deptCategories[nextIndex];
+
+    setPage(1);
+    router.push(`/category/${nextCategory._id}?page=1`, {
+      scroll: false,
+    });
+  };
+
+
+
 
   return (
-    <div>
+    <div className="main_category_page">
       {/* HEADER */}
       <div className="category-header">
         <div className="category-Image-with-name">
@@ -206,7 +233,7 @@ export default function Category({ deptCategories }) {
 
 
         )}
-        {cart.length === 0 && <span className="next-aisle-btn">
+        {cart.length === 0 && <span onClick={handleNextAisle} className="next-aisle-btn">
           Next Aisle <HiArrowNarrowRight />
         </span>}
       </div>
@@ -252,24 +279,29 @@ export default function Category({ deptCategories }) {
           <div className="right_side_products_header">
             <div className="heading_rsph">
               <h2>{totalProducts} Products Found</h2>
-              <p>Starting From $5</p>
+              {/* <p>Starting From $5</p> */}
             </div>
             <SortDropdown options={sortOptions} />
+            <GridToggle activeView={activeView} onOneColumn={() => {
+              setActiveView(1)
+            }} onTwoColumn={() => {
+              setActiveView(2)
+            }} />
           </div>
 
 
           {loading ? (
 
-            <div className="product_grid">
+            <div className={activeView === 1 ? "product_grid" : "product_grid two"}>
               {Array.from({ length: 12 }).map((_, i) => (
                 <ShimmerProductCard key={i} isArchivePage={true} />
               ))}
             </div>
 
           ) : products.length > 0 ? (
-            <div className="product_grid">
+            <div className={activeView === 1 ? "product_grid" : "product_grid two"}>
               {products.map((product, i) => (
-                <ProductCard isArchivePage={true} key={i} product={product} />
+                <div onClick={() => { setIsOpen(true); console.log("workinggggg") }}>  <ProductCard isArchivePage={true} key={i} product={product} /></div>
               ))}
             </div>
           ) : (
@@ -285,7 +317,7 @@ export default function Category({ deptCategories }) {
           />
         </div>
       </div>
-
+      <ComingSoonPopup isOpen={isOpen} onClose={() => { setIsOpen(false) }} />
     </div>
   );
 }

@@ -18,25 +18,17 @@ const PrevArrow = ({ onClick }) => (
   </div>
 );
 
-export default function Departments2({ departments, onClick }) {
+export default function Departments3({ departments, onClick }) {
   const sliderRef = useRef(null);
 
   const settings = {
     dots: false,
     infinite: false, // ✅ don't loop, keeps alignment left
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false, // ❌ slick ke apne arrows hata diye
     autoplay: false, // ✅ autoplay off (better for categories)
-    responsive: [
-      { breakpoint: 2000, settings: { slidesToShow: 6 } },
-      { breakpoint: 1600, settings: { slidesToShow: 6 } },
-      { breakpoint: 1200, settings: { slidesToShow: 6 } },
-      { breakpoint: 992, settings: { slidesToShow: 6 } },
-      { breakpoint: 768, settings: { slidesToShow: 6 } },
-      { breakpoint: 480, settings: { slidesToShow: 6 } },
-    ],
   };
 
   // ✅ Hide arrows if no need to scroll
