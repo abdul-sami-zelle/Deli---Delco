@@ -27,7 +27,20 @@ export default function Header({ onDeptClick, onDiscountClick }) {
   const [discounts, setDiscounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
-
+  const [popupTitle, setPopupTitle] = useState("");
+  const handleDeptClick = (dept) => {
+    const name = dept.name?.toLowerCase();
+    if (
+      name === "grocery" ||
+      name === "butcher shop" ||
+      name === "prepared food"
+    ) {
+      window.location.href = dept.url;
+    } else {
+      setPopupTitle(dept.name);
+      setIsOpen(true);
+    }
+  };
   const slides = [
     "/assets/Images/1.jpg",
     "/assets/Images/2.jpg",
@@ -137,8 +150,8 @@ export default function Header({ onDeptClick, onDiscountClick }) {
   const [showSidebarDepts, setShowSidebarDepts] = useState(false);
   const [showSidebarAisles, setShowSidebarAisles] = useState(true);
 
-  const [isOpen,setIsOpen] = useState(false);
-  
+  const [isOpen, setIsOpen] = useState(false);
+
 
 
 
@@ -183,7 +196,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               <div className="search-container">
                 <span
                   className="delco-fresh-btn"
-                  onClick={() => {}}
+                  onClick={() => { }}
                 >
                   {selectedCategory} <IoMdArrowDropdown />
                 </span>
@@ -211,12 +224,12 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               </div>
             </div>
             <div className="topbar-right">
-              <RiAccountCircleLine onClick={()=>{setIsOpen(true)}} size={30} color="#ffff" />
+              <RiAccountCircleLine onClick={() => { setIsOpen(true) }} size={30} color="#ffff" />
               {!showSideCart && (
                 <MdOutlineShoppingCart
                   size={30}
                   color="#fff"
-                  onClick={()=>{setIsOpen(true)}}
+                  onClick={() => { setIsOpen(true) }}
                 />
               )}
             </div>
@@ -293,41 +306,41 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                 <h2>Delco Farmers Market</h2>
               </div>
 
-              
 
-              
-               <div className="sidebar-dropdown">
-              <div
-                className="sidebar-dropdown-header"
-                onClick={() => setShowSidebarAisles((prev) => !prev)}
-              >
-                <span>Aisles</span>
-                <IoMdArrowDropdown
-                  className={showSidebarAisles ? "rotate" : ""}
-                />
-              </div>
 
-              {showSidebarAisles && (
-                <div className="sidebar-dropdown-content">
-                  {departments.map((dept) => (
-                    <div
-                      key={dept._id}
-                      className="sidebar-dept-item"
-                      onClick={() => {
-                        setShowSidebar(false);
-                        onDeptClick(dept._id); // SAME as header
-                      }}
-                    >
-                      <img
-                        src={`https://api.delcofarmersmarket.com${dept.image}`}
-                        alt={dept.name}
-                      />
-                      <span>{dept.name}</span>
-                    </div>
-                  ))}
+
+              <div className="sidebar-dropdown">
+                <div
+                  className="sidebar-dropdown-header"
+                  onClick={() => setShowSidebarAisles((prev) => !prev)}
+                >
+                  <span>Aisles</span>
+                  <IoMdArrowDropdown
+                    className={showSidebarAisles ? "rotate" : ""}
+                  />
                 </div>
-              )}
-            </div>
+
+                {showSidebarAisles && (
+                  <div className="sidebar-dropdown-content">
+                    {departments.map((dept) => (
+                      <div
+                        key={dept._id}
+                        className="sidebar-dept-item"
+                        onClick={() => {
+                          setShowSidebar(false);
+                          onDeptClick(dept._id); // SAME as header
+                        }}
+                      >
+                        <img
+                          src={`https://api.delcofarmersmarket.com${dept.image}`}
+                          alt={dept.name}
+                        />
+                        <span>{dept.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
 
               <div className="sidebar-dropdown">
@@ -349,7 +362,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                         className="sidebar-dept-item"
                         onClick={() => {
                           setShowSidebar(false);
-                          window.location.href = dept.url;
+                          handleDeptClick(dept); // Yeh function call karein
                         }}
                       >
                         <img
@@ -364,11 +377,11 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               </div>
 
 
-              
+
 
               <div className="sidebar-actions">
-                <button onClick={()=>{setIsOpen(true)}} className="btn sign-in">Sign Up</button>
-                <button onClick={()=>{setIsOpen(true)}} className="btn cart">Sign In</button>
+                <button onClick={() => { setIsOpen(true) }} className="btn sign-in">Sign Up</button>
+                <button onClick={() => { setIsOpen(true) }} className="btn cart">Sign In</button>
               </div>
             </div>
           </div>
@@ -413,8 +426,19 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                   <div className="" style={{ flex: 1 }}>
                     <ul>
                       {headerDepts && headerDepts?.map((dept) => (
-                        <li key={dept._id}>
-                          <a href={dept.url}><img style={{ width: "20px", height: "20px", marginRight: "10px" }} src={"https://api.delcofarmersmarket.com" + dept.image} alt="" srcset="" /> {dept.name}</a>
+                        <li
+                          key={dept._id}
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleDeptClick(dept)} // Redirect control yahan se hoga
+                        >
+                          <div style={{ display: "flex", alignItems: "center", padding: "5px 0" }}>
+                            <img
+                              style={{ width: "20px", height: "20px", marginRight: "10px" }}
+                              src={"https://api.delcofarmersmarket.com" + dept.image}
+                              alt={dept.name}
+                            />
+                            {dept.name}
+                          </div>
                         </li>
                       ))}
                     </ul>
@@ -460,7 +484,6 @@ export default function Header({ onDeptClick, onDiscountClick }) {
                               cursor: "pointer",
                               fontSize: "var(--fs-14)",
                               fontWeight: "var(--fw-400)"
-                              // borderBottom: "1px solid #f0f0f0",
                             }}
                           >
                             <img
@@ -483,7 +506,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
               </div>
             </div>
 
-           
+
           </div>
 
           <div className="sub-header-right">
@@ -498,7 +521,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
             <div className="sub-header-right-buttons">
               <button
                 className={"active"}
-                // onClick={() => setActiveModal("pickup")}
+              // onClick={() => setActiveModal("pickup")}
               >
                 <span>
                   <img src="/assets/Icons/store.png" alt="pickup" />
@@ -533,7 +556,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
         <LocationModal onClose={() => setActiveModal(null)} />
       )}
 
-      <ComingSoonPopup isOpen={isOpen} onClose={()=>{setIsOpen(false)}} />
+      <ComingSoonPopup isOpen={isOpen} onClose={() => { setIsOpen(false) }} />
     </>
   );
 }
