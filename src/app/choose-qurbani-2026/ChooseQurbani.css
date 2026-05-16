@@ -1,0 +1,875 @@
+/* Qurbani2026.css */
+
+.Qurbani-2026-wrapper {
+    width: 100%;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 25%),
+        linear-gradient(135deg, #6a733a 0%, #6a733a 40%, #4b5320 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    height: 100vh;
+    max-height: 100%;
+    position: relative;
+}
+
+.Qurbani-2026-container {
+    width: 100%;
+    max-width: 1680px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+    height: 100%;
+}
+
+/* LEFT */
+
+.Qurbani-2026-left {
+    flex: 1;
+    max-width: 840px;
+}
+
+.Qurbani-2026-badge {
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 14px;
+}
+
+.Qurbani-2026-timer {
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff3e2;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    backdrop-filter: blur(10px);
+}
+
+.Qurbani-2026-dot {
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+}
+
+.Qurbani-2026-heading {
+    font-size: 74px;
+    line-height: 1;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 26px;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.Qurbani-2026-heading span {
+    color: #ffe178;
+}
+
+.Qurbani-2026-description {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 19px;
+    line-height: 1.8;
+    margin-bottom: 34px;
+    max-width: 95%;
+}
+
+.Qurbani-2026-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.Qurbani-2026-primary-btn {
+    height: 58px;
+    padding: 0 30px;
+    border-radius: 999px;
+    border: none;
+    background: white;
+    color: var(--light-medium-green);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.Qurbani-2026-primary-btn:hover {
+    transform: translateY(-3px);
+}
+
+.Qurbani-2026-secondary-btn {
+    height: 58px;
+    padding: 0 28px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    color: white;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s ease;
+}
+
+.Qurbani-2026-secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.Qurbani-2026-whatsapp-btn {
+    height: 58px;
+    padding: 0 28px;
+    border-radius: 999px;
+    border: none;
+    background: #19d366;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 34px;
+    transition: 0.3s ease;
+}
+
+.Qurbani-2026-whatsapp-btn:hover {
+    transform: translateY(-3px);
+}
+
+.Qurbani-2026-footer-text p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+.Qurbani-2026-footer-text strong {
+    color: white;
+}
+
+/* RIGHT */
+
+.Qurbani-2026-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.Qurbani-2026-slider-card {
+    width: 100%;
+    max-width: 540px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.Qurbani-2026-slider-image {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* --- STEPPER CONTAINER CARD --- */
+.Qurbani-stepper-card_QURBANI_STEPPER_ {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 36px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    font-family: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    width: 100%;
+    min-height: 480px;
+}
+
+.Qurbani-step-title_QURBANI_STEPPER_ {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0b2240;
+    margin-bottom: 24px;
+}
+
+/* --- ANIMAL OPTION CARDS --- */
+.Qurbani-animal-grid_QURBANI_STEPPER_ {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.Qurbani-animal-card_QURBANI_STEPPER_ {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 14px;
+    text-align: center;
+    cursor: pointer;
+    background: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Qurbani-animal-card_QURBANI_STEPPER_:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+}
+
+.Qurbani-animal-card_QURBANI_STEPPER_.active_QURBANI_STEPPER_ {
+    border: 2px solid var(--light-medium-green);
+    background: #f1f1f1;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.Qurbani-animal-emoji_QURBANI_STEPPER_ {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.Qurbani-animal-name_QURBANI_STEPPER_ {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0b2240;
+    margin-bottom: 4px;
+}
+
+.Qurbani-animal-weight_QURBANI_STEPPER_ {
+    font-size: 15px;
+    color: #3b3e44;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.Qurbani-animal-price_QURBANI_STEPPER_ {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--light-medium-green);
+}
+
+/* --- DETAIL SPECIFICATION ROW --- */
+.Qurbani-checkout-row_QURBANI_STEPPER_ {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+/* --- QUANTITY COUNTER --- */
+.Qurbani-quantity-block_QURBANI_STEPPER_ {
+    flex: 0 0 auto;
+}
+
+.Qurbani-quantity-label_QURBANI_STEPPER_ {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.Qurbani-counter-wrapper_QURBANI_STEPPER_ {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Qurbani-counter-btn_QURBANI_STEPPER_ {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.Qurbani-counter-btn_QURBANI_STEPPER_:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+.Qurbani-counter-btn_QURBANI_STEPPER_:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.Qurbani-counter-value_QURBANI_STEPPER_ {
+    width: 54px;
+    height: 42px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0b2240;
+    background: #ffffff;
+}
+
+.Qurbani-quantity-range_QURBANI_STEPPER_ {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-left: 4px;
+}
+
+/* --- INVOICE BREAKDOWN SLOT --- */
+.Qurbani-invoice-block_QURBANI_STEPPER_ {
+    flex: 1 1 auto;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid #f1f5f9;
+}
+
+.Qurbani-invoice-line_QURBANI_STEPPER_ {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.Qurbani-invoice-line_QURBANI_STEPPER_.highlighted-row_QURBANI_STEPPER_ {
+    color: #0b2240;
+    font-size: 15px;
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 12px;
+    margin-top: 2px;
+}
+
+.Qurbani-invoice-line_QURBANI_STEPPER_.deposit-row_QURBANI_STEPPER_ {
+    color: var(--light-medium-green);
+    font-weight: 600;
+}
+
+.Qurbani-invoice-line_QURBANI_STEPPER_.balance-line_QURBANI_STEPPER_ {
+    font-size: 16px;
+}
+
+/* --- STEPPER PROGRESS BUTTONS --- */
+.Qurbani-stepper-actions_QURBANI_STEPPER_ {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 24px;
+    margin-top: 12px;
+}
+
+.Qurbani-stepper-next-btn_QURBANI_STEPPER_ {
+    background: var(--light-medium-green);
+    color: #ffffff;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.Qurbani-stepper-next-btn_QURBANI_STEPPER_:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+.Qurbani-stepper-back-btn_QURBANI_STEPPER_ {
+    background: transparent;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.Qurbani-stepper-back-btn_QURBANI_STEPPER_:hover {
+    background: #f8fafc;
+}
+
+.Qurbani-placeholder-form_QURBANI_STEPPER_ {
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    border: 2px dashed #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .Qurbani-2026-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        height: auto;
+    }
+
+    .Qurbani-2026-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+    }
+
+    .Qurbani-2026-description {
+        max-width: 100%;
+    }
+
+    .Qurbani-2026-heading {
+        font-size: 60px;
+    }
+
+    .Qurbani-2026-buttons {
+        justify-content: center;
+    }
+
+    .Qurbani-2026-wrapper {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .Qurbani-2026-wrapper {
+        padding: 40px 18px;
+    }
+
+    .Qurbani-2026-heading {
+        font-size: 46px;
+    }
+
+    .Qurbani-2026-description {
+        font-size: 16px;
+    }
+
+    .Qurbani-2026-primary-btn,
+    .Qurbani-2026-secondary-btn,
+    .Qurbani-2026-whatsapp-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 17px;
+    }
+
+    .Qurbani-2026-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .Qurbani-2026-slider-card {
+        max-width: 100%;
+    }
+
+    .Qurbani-2026-timer {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .Qurbani-animal-grid_QURBANI_STEPPER_ {
+        grid-template-columns: 1fr;
+    }
+
+    .Qurbani-checkout-row_QURBANI_STEPPER_ {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .Qurbani-phone-block-row_QURBANI_STEPPER_{
+        gap: 6px;
+    }
+
+    .Qurbani-quantity-block_QURBANI_STEPPER_ {
+        width: 100%;
+    }
+
+    .Qurbani-counter-wrapper_QURBANI_STEPPER_ {
+        justify-content: center;
+    }
+
+    .Qurbani-quantity-range_QURBANI_STEPPER_{
+        display: none;
+    }
+
+    .Qurbani-field-group_QURBANI_STEPPER_{
+        text-align: left;
+        gap: 6px !important;
+    }
+
+}
+
+
+/* --- STEP 2 SPECIFIC STRUCTURAL UI CONTROLS --- */
+.Qurbani-step-subtitle_QURBANI_STEPPER_ {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 24px;
+    margin-top: -18px;
+}
+
+.Qurbani-form-layout_QURBANI_STEPPER_ {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.Qurbani-form-row-split_QURBANI_STEPPER_ {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.Qurbani-form-row-compact_QURBANI_STEPPER_ {
+    display: grid;
+    grid-template-columns: 180px 220px;
+    gap: 16px;
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ input,
+.Qurbani-field-group_QURBANI_STEPPER_ textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
+    color: #0b2240;
+    outline: none;
+    background: #ffffff;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ input:focus,
+.Qurbani-field-group_QURBANI_STEPPER_ textarea:focus {
+    border-color: var(--light-medium-green);
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ textarea {
+    resize: none;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.Qurbani-field-group_QURBANI_STEPPER_ textarea::placeholder {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Phone Block Field Row Alignments */
+.Qurbani-phone-block-row_QURBANI_STEPPER_ {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    width: 100%;
+}
+
+.Qurbani-inner-action-btn_QURBANI_STEPPER_ {
+    height: 46px;
+    padding: 0 24px;
+    border: 1px solid #a82329;
+    background: transparent;
+    color: #a82329;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    margin-bottom: 1px;
+}
+
+.Qurbani-inner-action-btn_QURBANI_STEPPER_:hover {
+    background: rgba(168, 35, 41, 0.04);
+}
+
+/* Footer Stepper Controls Adjustment */
+.Qurbani-stepper-footer-panel_QURBANI_STEPPER_ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.Qurbani-stepper-submit-btn_QURBANI_STEPPER_ {
+    background: var(--light-medium-green);
+    color: #ffffff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.Qurbani-stepper-submit-btn_QURBANI_STEPPER_:hover {
+    opacity: 0.95;
+}
+
+/* Responsive updates for input items */
+@media (max-width: 600px) {
+
+    .Qurbani-form-row-split_QURBANI_STEPPER_,
+    .Qurbani-form-row-compact_QURBANI_STEPPER_ {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .Qurbani-phone-block-row_QURBANI_STEPPER_ {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .Qurbani-inner-action-btn_QURBANI_STEPPER_ {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .Qurbani-form-layout_QURBANI_STEPPER_{
+        gap: 6px;
+    }
+    .bookingSumarryLayout{
+        flex-direction: column;
+    }
+    .Qurbani-stepper-card_QURBANI_STEPPER_{
+        width: 500px;
+    }
+
+    .Qurbani-2026-left{
+        display: none;
+    }
+}
+
+
+.Qurbani-step-three_QURBANI_STEPPER_ {
+    background: var(--white);
+    border-radius: 16px;
+    font-family: var(--font-poppins), sans-serif;
+}
+
+/* Title */
+.Qurbani-step-three_QURBANI_STEPPER_ .Qurbani-step-title_QURBANI_STEPPER_ {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+/* Review Card */
+.Qurbani-review-box_QURBANI_STEPPER_ {
+    margin-top: 15px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Each row like form field style */
+.Qurbani-review-box_QURBANI_STEPPER_ p {
+    margin: 0;
+    padding: 10px 12px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Labels */
+.Qurbani-review-box_QURBANI_STEPPER_ strong {
+    color: var(--peace);
+    font-weight: 600;
+}
+
+/* Divider */
+.Qurbani-review-box_QURBANI_STEPPER_ hr {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    margin: 10px 0;
+}
+
+/* Footer buttons container */
+.Qurbani-stepper-footer-panel_QURBANI_STEPPER_ {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+/* Buttons modern look */
+.Qurbani-stepper-footer-panel_QURBANI_STEPPER_ button {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: none;
+}
+
+/* Back button */
+.Qurbani-stepper-back-btn_QURBANI_STEPPER_ {
+    background: var(--light-gray);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.Qurbani-stepper-back-btn_QURBANI_STEPPER_:hover {
+    background: var(--border-color);
+    transform: translateY(-1px);
+}
+
+/* Confirm button */
+.Qurbani-stepper-submit-btn_QURBANI_STEPPER_ {
+    background: var(--peace);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(106, 115, 58, 0.25);
+}
+
+.Qurbani-stepper-submit-btn_QURBANI_STEPPER_:hover {
+    background: #5d6633;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 25px rgba(106, 115, 58, 0.35);
+}
+
+.Qurbani-select-wrapper {
+    position: relative;
+}
+
+.Qurbani-custom-select {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-poppins), sans-serif;
+}
+
+/* selected box */
+.Qurbani-select-box {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.Qurbani-select-box:hover {
+    border-color: var(--peace);
+    box-shadow: 0 6px 16px rgba(106, 115, 58, 0.12);
+}
+
+/* dropdown list */
+.Qurbani-select-options {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    z-index: 10;
+
+    animation: dropdownFade 0.2s ease;
+}
+
+/* options */
+.Qurbani-select-options div {
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* hover effect */
+.Qurbani-select-options div:hover {
+    background: var(--white-gray);
+    color: var(--peace);
+}
+
+/* arrow */
+.arrow_qurbani-2026 {
+    color: var(--text-gray);
+    font-size: 18px;
+}
+
+/* animation */
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bookingSumarryLayout{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+
+}

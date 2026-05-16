@@ -498,9 +498,6 @@ export default function Header({ onDeptClick, onDiscountClick }) {
       </div> */}
 
 
-      <div className="tag_line_web_header">
-        
-      </div>
 
       {activeModal === "delivery" && (
         <DeliveryModal onClose={() => setActiveModal(null)} />
