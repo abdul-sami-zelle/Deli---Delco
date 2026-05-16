@@ -1,16 +1,30 @@
 /* Qurbani2026.css */
 
+
+.main_page_1_lo {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .Qurbani-2026-wrapper {
   width: 100%;
   background:
-    radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 25%),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 25%),
     linear-gradient(135deg, #6a733a 0%, #6a733a 40%, #4b5320 100%);
-  overflow: hidden;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 30px 20px;
   position: relative;
+  overflow: hidden;
+ height:  calc(100vh - 90px);
+  /* Full screen minus header + footer */
+  /* min-height: calc(100vh - 300px); */
+  /* 80px header + 80px footer */
 }
 
 .Qurbani-2026-container {
@@ -31,8 +45,8 @@
 
 .Qurbani-2026-badge {
   width: fit-content;
-  background: rgba(255,255,255,0.14);
-  color:var(--white);
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
   border-radius: 999px;
   padding: 10px 18px;
   font-size: 13px;
@@ -47,7 +61,7 @@
 
 .Qurbani-2026-timer {
   width: fit-content;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff3e2;
   border-radius: 999px;
   padding: 12px 18px;
@@ -58,6 +72,7 @@
   gap: 10px;
   margin-bottom: 26px;
   backdrop-filter: blur(10px);
+  display: none;
 }
 
 .Qurbani-2026-dot {
@@ -81,7 +96,7 @@
 }
 
 .Qurbani-2026-description {
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   font-size: 19px;
   line-height: 1.8;
   margin-bottom: 34px;
@@ -107,6 +122,10 @@
   font-weight: 700;
   cursor: pointer;
   transition: 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Qurbani-2026-primary-btn:hover {
@@ -117,7 +136,7 @@
   height: 58px;
   padding: 0 28px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   background: transparent;
   color: white;
   font-size: 19px;
@@ -130,7 +149,7 @@
 }
 
 .Qurbani-2026-secondary-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .Qurbani-2026-whatsapp-btn {
@@ -155,9 +174,9 @@
 }
 
 .Qurbani-2026-footer-text p {
-  color: rgba(255,255,255,0.92);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 17px;
-  line-height: 1.9;
+  line-height: 1.4;
 }
 
 .Qurbani-2026-footer-text strong {
@@ -167,7 +186,7 @@
 /* RIGHT */
 
 .Qurbani-2026-right {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,8 +199,8 @@
   overflow: hidden;
   position: relative;
   box-shadow:
-    0 30px 70px rgba(0,0,0,0.25),
-    0 0 0 1px rgba(255,255,255,0.15);
+    0 30px 70px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .Qurbani-2026-slider-image {
@@ -196,6 +215,10 @@
   .Qurbani-2026-container {
     flex-direction: column;
     text-align: center;
+  }
+
+  .Qurbani-2026-right{
+    display: none;
   }
 
   .Qurbani-2026-left {
@@ -225,7 +248,7 @@
   }
 
   .Qurbani-2026-heading {
-    font-size: 46px;
+    font-size: 31px;
   }
 
   .Qurbani-2026-description {
@@ -254,7 +277,7 @@
     justify-content: center;
   }
 
-  .Right_OPTIONs_Wrapper{
+  .Right_OPTIONs_Wrapper {
     display: none;
   }
 }
@@ -271,11 +294,11 @@
   justify-content: center;
 }
 
-.Qurbani-2026-options-wrapper_second{
-      width: 1650px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+.Qurbani-2026-options-wrapper_second {
+  width: 1650px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Qurbani-2026-options-header h2 {
@@ -303,7 +326,7 @@
   background: #fff;
   border-radius: 18px;
   padding: 25px 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   transition: 0.3s ease;
   display: flex;
   width: 100%;
@@ -311,6 +334,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  height: 70vh;
 }
 
 .Qurbani-2026-option-card:hover {
@@ -349,9 +373,9 @@
   justify-content: flex-start;
 }
 
-.Qurbani-2026-price span{
-    color: var(--black);
-    font-size: 10px;
+.Qurbani-2026-price span {
+  color: var(--black);
+  font-size: 10px;
 }
 
 .Qurbani-2026-option-card small {
@@ -370,13 +394,17 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 18px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.image_Qurbani-2026{
-    width: 520px;
-    border-radius: 10px;
+.image_Qurbani-2026 {
+  width: 520px;
+  border-radius: 10px;
+  max-height: 40vh;
+  object-fit: cover;
 }
 
-.Right_OPTIONs_Wrapper{
-
-}
+.Right_OPTIONs_Wrapper {}

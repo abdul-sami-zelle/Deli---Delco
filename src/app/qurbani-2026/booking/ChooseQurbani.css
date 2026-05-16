@@ -71,7 +71,7 @@
 }
 
 .Qurbani-2026-heading {
-    font-size: 74px;
+    font-size: 50px;
     line-height: 1;
     color: white;
     font-weight: 700;
@@ -91,7 +91,11 @@
     max-width: 95%;
 }
 
+.Qurbani-2026-buttons a{
+text-decoration: none;
+}
 .Qurbani-2026-buttons {
+    
     display: flex;
     align-items: center;
     gap: 16px;
@@ -110,6 +114,9 @@
     font-weight: 700;
     cursor: pointer;
     transition: 0.3s ease;
+     display: flex;
+    align-items: center;
+      gap: 12px;
 }
 
 .Qurbani-2026-primary-btn:hover {
@@ -211,6 +218,32 @@
     font-weight: 700;
     color: #0b2240;
     margin-bottom: 24px;
+}
+
+.Qurbani-step-title_QURBANI_STEPPER_.confirmation{
+    background-color: #4b5320;
+    color: #fff !important;
+    width: fit-content;
+    padding: 5px 8px;
+    border-radius: 4px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.para_2{
+    font-size: 13px;
+    color: #595959;
+    line-height: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.Qurbani-step-title_QURBANI_STEPPER_.confirmation img{
+    height: 30px;
+    width: 30px;
 }
 
 /* --- ANIMAL OPTION CARDS --- */
@@ -455,7 +488,7 @@
     }
 
     .Qurbani-2026-heading {
-        font-size: 60px;
+        font-size: 45px;
     }
 
     .Qurbani-2026-buttons {
@@ -469,12 +502,23 @@
 }
 
 @media (max-width: 768px) {
+
+    .min-f{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .Qurbani-2026-right{
+        max-width: 100%;
+        width: 100%;
+    }
     .Qurbani-2026-wrapper {
         padding: 40px 18px;
     }
 
     .Qurbani-2026-heading {
-        font-size: 46px;
+        font-size: 31px;
     }
 
     .Qurbani-2026-description {
@@ -656,8 +700,31 @@
     opacity: 0.95;
 }
 
+   .desktop_bth_tn{
+        display: none !important;
+    }
+
 /* Responsive updates for input items */
 @media (max-width: 600px) {
+
+    .desktop_bth_tn{
+        display: flex !important;
+    }
+
+    .Qurbani-step-title_QURBANI_STEPPER_ {
+        font-size: 16px !important;
+    }
+ 
+
+    .Qurbani-stepper-footer-panel_QURBANI_STEPPER_.confirmation_step{
+        flex-direction: column-reverse;
+        
+    }
+
+    .Qurbani-stepper-footer-panel_QURBANI_STEPPER_ button{
+        width: 100%;
+    }
+
 
     .Qurbani-form-row-split_QURBANI_STEPPER_,
     .Qurbani-form-row-compact_QURBANI_STEPPER_ {
@@ -682,7 +749,7 @@
         flex-direction: column;
     }
     .Qurbani-stepper-card_QURBANI_STEPPER_{
-        width: 500px;
+        width: 100%;
     }
 
     .Qurbani-2026-left{
@@ -872,4 +939,15 @@
     width: 100%;
     gap: 10px;
 
+}
+
+.input-error {
+    border: 1px solid #e53935 !important;
+    box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.05) !important;
+    transition: all 0.2s ease;
+}
+
+.Qurbani-2026-slider-card-confirmation-page{
+    width: 100% ;
+    height: auto;
 }

@@ -8,13 +8,47 @@ import {
 } from "react-icons/fa";
 import Header from "@/components/Header/Header copy";
 import { IoIosArrowDown } from "react-icons/io";
+import Loader from "@/components/Loader/Loader";
 
 function Page() {
 
     const [currentStep, setCurrentStep] = useState(1);
-    const [selectedAnimal, setSelectedAnimal] = useState("Goat");
+    const [selectedAnimal, setSelectedAnimal] = useState("6a08851df5082f90aa481fda");
+    const [selectedAnimalName, setSelectedAnimalName] = useState("Goat");
+    const [bookingNo, setBookingNo] = useState("")
+
+    const [errors, setErrors] = useState({});
+    const validateStepTwo = () => {
+
+        let newErrors = {};
+
+        if (!formData.fullName.trim()) {
+            newErrors.fullName = "Full name is required";
+        }
+
+        if (!selectedDay.trim()) {
+            newErrors.selectedDay = "Please select a day";
+        }
+
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Phone is required";
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+        ) {
+            newErrors.email = "Invalid email address";
+        }
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
     const [quantity, setQuantity] = useState(1);
-    const [selectedDay, setSelectedDay] = useState("day 1");
+    const [selectedDay, setSelectedDay] = useState("Day 1");
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -25,19 +59,115 @@ function Page() {
         zip: "",
         instructions: ""
     });
+
+    const handleZipLookup = async (zip) => {
+
+        // only call api when zip is 5 digits
+        if (zip.length !== 5) return;
+
+        try {
+
+            const response = await fetch(
+                `https://zip.getziptastic.com/v2/US/${zip}`
+            );
+
+            const data = await response.json();
+
+            console.log("ZIP RESPONSE:", data);
+
+            if (data.city) {
+
+                setFormData(prev => ({
+                    ...prev,
+                    zip: zip,
+                    city: data.city,
+                    state: data.state_short || data.state
+                }));
+
+            }
+
+        } catch (error) {
+
+            console.error("ZIP Lookup Failed:", error);
+
+        }
+    };
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = async (e) => {
+
         const { name, value } = e.target;
+
+        // PHONE FORMAT
+        if (name === "phone") {
+
+            let numbers = value.replace(/\D/g, "");
+
+            // limit to 10 digits
+            numbers = numbers.substring(0, 10);
+
+            let formattedPhone = numbers;
+
+            if (numbers.length > 0) {
+                formattedPhone = `(${numbers.substring(0, 3)}`;
+            }
+
+            if (numbers.length >= 4) {
+                formattedPhone += `) ${numbers.substring(3, 6)}`;
+            }
+
+            if (numbers.length >= 7) {
+                formattedPhone += `-${numbers.substring(6, 10)}`;
+            }
+
+            setFormData(prev => ({
+                ...prev,
+                phone: formattedPhone
+            }));
+
+            setErrors(prev => ({
+                ...prev,
+                phone: ""
+            }));
+
+            return;
+        }
+
+        // ZIP AUTO LOOKUP
+        if (name === "zip") {
+
+            const zipValue = value.replace(/\D/g, "");
+
+            setFormData(prev => ({
+                ...prev,
+                zip: zipValue
+            }));
+
+            setErrors(prev => ({
+                ...prev,
+                zip: ""
+            }));
+
+            if (zipValue.length === 5) {
+                handleZipLookup(zipValue);
+            }
+
+            return;
+        }
+
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
-    };
 
+        setErrors(prev => ({
+            ...prev,
+            [name]: ""
+        }));
+    };
     const animalOptions = [
-        { id: "Lamb", name: "Lamb", weight: "45-55 LBS", price: 499, emoji: "🐑" },
-        { id: "Goat", name: "Goat", weight: "45-55 LBS", price: 499, emoji: "🐐" },
+        { id: "6a0884fef5082f90aa481fd8", name: "Lamb", main_id: "6a0884fef5082f90aa481fd8", weight: "45-55 LBS", price: 499, emoji: "/lamb.png" },
+        { id: "6a08851df5082f90aa481fda", name: "Goat", main_id: "6a08851df5082f90aa481fda", weight: "45-55 LBS", price: 499, emoji: "/goat.png" },
     ];
 
     const activeAnimalData = animalOptions.find(item => item.id === selectedAnimal) || animalOptions[1];
@@ -59,17 +189,62 @@ function Page() {
         setCurrentStep(prev => prev + 1);
     };
 
-    const handleSubmitBooking = () => {
-        console.log("BOOKING DATA:", {
-            selectedAnimal,
-            quantity,
-            formData,
-            subtotal,
-            depositTotal,
-            balanceAtPickup
-        });
+    const [loading, setLoading] = useState(false);
 
-        alert("Booking Submitted Successfully!");
+    const handleSubmitBooking = async () => {
+
+        try {
+
+            setLoading(true);
+
+            const payload = {
+                animal: selectedAnimal,
+                quantity: quantity,
+                preferred_day: selectedDay,
+                full_name: formData.fullName,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData.streetAddress,
+                city: formData.city,
+                state: formData.state,
+                zip_code: formData.zip,
+                instruction: formData.instructions
+            };
+
+            const response = await fetch(
+                "https://api.delcofarmersmarket.com/api/v1/qurbani-booking",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Something went wrong");
+            }
+
+            console.log("BOOKING RESPONSE:", data);
+            setBookingNo(data?.data?.booking_no || data?.booking_no);
+
+            // OPTIONAL RESET
+            setCurrentStep(4);
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(error.message || "Failed to submit booking");
+
+        } finally {
+
+            setLoading(false);
+
+        }
     };
 
     return (
@@ -99,18 +274,20 @@ function Page() {
                         </h1>
 
                         <div className="Qurbani-2026-buttons">
-                            <button className="Qurbani-2026-primary-btn">
-                                Book Your Qurbani →
-                            </button>
-                            <button className="Qurbani-2026-secondary-btn">
-                                <FaPhoneAlt />
-                                Call 732-798-6099
-                            </button>
+                            <a href="tel:+16108621955">
+                                <button className="Qurbani-2026-primary-btn">
+                                    <FaPhoneAlt />
+                                    Call 610-862-1955
+                                </button>
+                            </a>
+                            {/* <button className="Qurbani-2026-secondary-btn">
+                               
+                            </button> */}
                         </div>
 
                         <div className="Qurbani-2026-footer-text">
                             <p>
-                                Online booking closes <strong>May 27, 2026</strong> (end of day, ET).
+                                From Selection to Slaughter. Complete Peace of Mind
                             </p>
                         </div>
                     </div>
@@ -133,9 +310,10 @@ function Page() {
                                             <div
                                                 key={animal.id}
                                                 className={`Qurbani-animal-card_QURBANI_STEPPER_ ${selectedAnimal === animal.id ? "active_QURBANI_STEPPER_" : ""}`}
-                                                onClick={() => setSelectedAnimal(animal.id)}
+                                                onClick={() => { setSelectedAnimal(animal.id); setSelectedAnimalName(animal.name) }}
                                             >
-                                                <div className="Qurbani-animal-emoji_QURBANI_STEPPER_">{animal.emoji}</div>
+                                                {/* <div className="Qurbani-animal-emoji_QURBANI_STEPPER_">{animal.emoji}</div> */}
+                                                <img style={{ height: "45px", width: "auto" }} src={animal.emoji} alt="" srcset="" />
                                                 <div className="Qurbani-animal-name_QURBANI_STEPPER_">{animal.name}</div>
                                                 <div className="Qurbani-animal-weight_QURBANI_STEPPER_">{animal.weight}</div>
                                                 <div className="Qurbani-animal-price_QURBANI_STEPPER_">
@@ -233,16 +411,17 @@ function Page() {
 
                                         <div className="Qurbani-form-row-split_QURBANI_STEPPER_">
                                             <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>Full name</label>
+                                                <label>Full name*</label>
                                                 <input
                                                     type="text"
                                                     name="fullName"
                                                     value={formData.fullName}
                                                     onChange={handleInputChange}
+                                                    className={errors.fullName ? "input-error" : ""}
                                                 />
                                             </div>
                                             <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>Select Day</label>
+                                                <label>Select Day*</label>
 
                                                 <div className="Qurbani-custom-select">
 
@@ -250,24 +429,24 @@ function Page() {
                                                         className="Qurbani-select-box"
                                                         onClick={() => setDropdownOpen(!dropdownOpen)}
                                                     >
-                                                        {selectedDay === "day 1" && "Day 1 "}
-                                                        {selectedDay === "day 2" && "Day 2 "}
-                                                        {selectedDay === "day 3" && "Day 3 "}
+                                                        {selectedDay === "Day 1" && "Day 1 "}
+                                                        {selectedDay === "Day 2" && "Day 2 "}
+                                                        {selectedDay === "Day 3" && "Day 3 "}
 
                                                         <span className="arrow_qurbani-2026"><IoIosArrowDown /></span>
                                                     </div>
 
                                                     {dropdownOpen && (
                                                         <div className="Qurbani-select-options">
-                                                            <div onClick={() => { setSelectedDay("day 1"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 1"); setDropdownOpen(false); }}>
                                                                 Day 1
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("day 2"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 2"); setDropdownOpen(false); }}>
                                                                 Day 2
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("day 3"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 3"); setDropdownOpen(false); }}>
                                                                 Day 3
                                                             </div>
                                                         </div>
@@ -279,21 +458,24 @@ function Page() {
 
                                         <div className="Qurbani-phone-block-row_QURBANI_STEPPER_">
                                             <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>Phone</label>
+                                                <label>Phone*</label>
                                                 <input
                                                     type="text"
                                                     name="phone"
                                                     value={formData.phone}
                                                     onChange={handleInputChange}
+                                                    className={errors.phone ? "input-error" : ""}
+
                                                 />
                                             </div>
                                             <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>Email</label>
+                                                <label>Email*</label>
                                                 <input
                                                     type="email"
                                                     name="email"
                                                     value={formData.email}
                                                     onChange={handleInputChange}
+                                                    className={errors.email ? "input-error" : ""}
                                                 />
                                             </div>
                                         </div>
@@ -311,13 +493,14 @@ function Page() {
                                         </div>
 
                                         <div className="Qurbani-phone-block-row_QURBANI_STEPPER_">
-                                           
-                                           <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>City</label>
+
+
+                                            <div className="Qurbani-field-group_QURBANI_STEPPER_">
+                                                <label>Zip Code</label>
                                                 <input
                                                     type="text"
-                                                    name="city"
-                                                    value={formData.city}
+                                                    name="zip"
+                                                    value={formData.zip}
                                                     onChange={handleInputChange}
                                                 />
                                             </div>
@@ -330,17 +513,17 @@ function Page() {
                                                     onChange={handleInputChange}
                                                 />
                                             </div>
-
                                             <div className="Qurbani-field-group_QURBANI_STEPPER_">
-                                                <label>ZIP</label>
+                                                <label>City</label>
                                                 <input
                                                     type="text"
-                                                    name="zip"
-                                                    value={formData.zip}
+                                                    name="city"
+                                                    value={formData.city}
                                                     onChange={handleInputChange}
                                                 />
                                             </div>
-                                            
+
+
                                         </div>
 
                                         <div className="Qurbani-field-group_QURBANI_STEPPER_">
@@ -367,7 +550,15 @@ function Page() {
                                             <button
                                                 type="button"
                                                 className="Qurbani-stepper-submit-btn_QURBANI_STEPPER_"
-                                                onClick={() => setCurrentStep(3)}
+                                                onClick={() => {
+
+                                                    const isValid = validateStepTwo();
+
+                                                    if (isValid) {
+                                                        setCurrentStep(3);
+                                                    }
+
+                                                }}
                                             >
                                                 Next →
                                             </button>
@@ -389,10 +580,10 @@ function Page() {
                                     <div className="Qurbani-review-box_QURBANI_STEPPER_">
 
                                         <p><strong>Name:</strong> {formData.fullName}</p>
-                                        <p><strong>Email:</strong> {formData.email}</p>
+                                        <p className="min-f"><strong>Email:</strong> {formData.email}</p>
                                         <p><strong>Phone:</strong> {formData.phone}</p>
                                         <p><strong>Selected Day:</strong> {selectedDay}</p>
-                                        <p>
+                                        <p className="min-f">
                                             <strong>Address:</strong>{" "}
                                             {formData.streetAddress}, {formData.city}, {formData.state}, {formData.zip}
                                         </p>
@@ -406,7 +597,7 @@ function Page() {
                                             <strong style={{ marginBottom: '10px' }}>Booking Summary:</strong>{" "}
 
                                             <div className="bookingSumarryLayout" >
-                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Animal:</strong> {selectedAnimal}</p>
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Animal:</strong> {selectedAnimalName}</p>
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Quantity:</strong> {quantity}</p>
 
                                             </div>
@@ -419,7 +610,11 @@ function Page() {
 
                                     </div>
 
-                                    <div className="Qurbani-stepper-footer-panel_QURBANI_STEPPER_">
+                                    <div className="Qurbani-stepper-footer-panel_QURBANI_STEPPER_ confirmation_step">
+
+
+
+
 
                                         <button
                                             type="button"
@@ -428,7 +623,6 @@ function Page() {
                                         >
                                             ← Back
                                         </button>
-
                                         <button
                                             type="button"
                                             className="Qurbani-stepper-submit-btn_QURBANI_STEPPER_"
@@ -442,11 +636,88 @@ function Page() {
                                 </div>
                             )}
 
+
+                            {/* ================= STEP 3 (UPDATED ONLY PRICE LOGIC) ================= */}
+                            {currentStep === 4 && (
+                                <div className="Qurbani-step-three_QURBANI_STEPPER_">
+
+                                    <h3 className="Qurbani-step-title_QURBANI_STEPPER_ confirmation" style={{ textAlign: "center" }}>
+                                        <img src="/check.png" alt="" srcset="" />
+                                        Your Booking Has Been Received
+                                    </h3>
+
+                                    <p className="para_2">Thank you for booking your Eid-ul-Adha Qurbani with Delco Farmers Market. We have successfully received your booking, our team will shortly contact you for confirmation.</p>
+
+                                    <div className="Qurbani-2026-slider-card-confirmation-page">
+
+                                        {/* Replace this image with your own */}
+                                        <img
+                                            src="./Qurbani_Destop Banner_Delco_small.jpeg"
+                                            alt="Qurbani Poster"
+                                            className="Qurbani-2026-slider-image"
+                                        />
+
+                                    </div>
+
+                                    <div className="Qurbani-review-box_QURBANI_STEPPER_">
+
+
+
+
+                                        <p style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                gap: "5px"
+                                            }}>
+                                                <strong style={{ marginBottom: '10px' }}>Booking No :</strong>{" "}
+                                                <strong style={{ marginBottom: '10px' }}>{bookingNo}</strong>{" "}
+                                            </div>
+
+                                            <div className="bookingSumarryLayout" >
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Animal:</strong> {selectedAnimalName}</p>
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Quantity:</strong> {quantity}</p>
+
+                                            </div>
+                                            <div className="bookingSumarryLayout">
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Unit Price:</strong> ${unitPrice.toFixed(2)}</p>
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
+                                            </div>
+
+                                        </p>
+
+                                    </div>
+
+                                    <div className="Qurbani-stepper-footer-panel_QURBANI_STEPPER_ desktop_bth_tn confirmation_step">
+
+
+
+
+                                        <button
+  type="button"
+  className="Qurbani-stepper-submit-btn_QURBANI_STEPPER_"
+  onClick={() => {
+    window.location.href = "https://delcofarmersmarket.com";
+  }}
+>
+  Back to Home
+</button>
+
+                                    </div>
+
+
+
+                                </div>
+                            )}
+
+
                         </div>
                     </div>
 
                 </div>
             </section>
+            {loading && <Loader />}
         </>
     );
 }
