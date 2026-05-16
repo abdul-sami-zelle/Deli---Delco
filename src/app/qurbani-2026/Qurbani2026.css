@@ -216,10 +216,10 @@
     flex-direction: column;
     text-align: center;
   }
-
+/* 
   .Qurbani-2026-right{
     display: none;
-  }
+  } */
 
   .Qurbani-2026-left {
     display: flex;
@@ -238,6 +238,10 @@
 
   .Qurbani-2026-buttons {
     justify-content: center;
+  }
+
+  .Qurbani-2026-option-card{
+    display: none !important;
   }
 }
 
@@ -397,7 +401,6 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .image_Qurbani-2026 {

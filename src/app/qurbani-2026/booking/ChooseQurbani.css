@@ -576,6 +576,10 @@ text-decoration: none;
         gap: 6px !important;
     }
 
+    .booking_page_left{
+        display: none !important;
+    }
+
 }
 
 
@@ -752,9 +756,7 @@ text-decoration: none;
         width: 100%;
     }
 
-    .Qurbani-2026-left{
-        display: none;
-    }
+   
 }
 
 

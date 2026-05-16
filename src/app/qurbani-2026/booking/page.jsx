@@ -255,7 +255,7 @@ function Page() {
                 <div className="Qurbani-2026-container">
 
                     {/* LEFT SIDE */}
-                    <div className="Qurbani-2026-left">
+                    <div className="Qurbani-2026-left booking_page_left">
                         <div className="Qurbani-2026-badge">
                             <span>☪</span>
                             EID-AL-ADHA MUBARAK
@@ -652,7 +652,7 @@ function Page() {
 
                                         {/* Replace this image with your own */}
                                         <img
-                                            src="./Qurbani_Destop Banner_Delco_small.jpeg"
+                                            src="/Qurbani_Destop Banner_Delco_small.jpeg"
                                             alt="Qurbani Poster"
                                             className="Qurbani-2026-slider-image"
                                         />
