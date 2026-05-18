@@ -711,6 +711,10 @@ text-decoration: none;
 /* Responsive updates for input items */
 @media (max-width: 600px) {
 
+    .booking_no_0{
+        display: none !important;
+    }
+
     .desktop_bth_tn{
         display: flex !important;
     }

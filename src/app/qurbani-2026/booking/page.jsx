@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ChooseQurbani.css";
 import {
     FaPhoneAlt,
@@ -10,9 +10,18 @@ import Header from "@/components/Header/Header copy";
 import { IoIosArrowDown } from "react-icons/io";
 import Loader from "@/components/Loader/Loader";
 
+
+
 function Page() {
 
+
     const [currentStep, setCurrentStep] = useState(1);
+    useEffect(() => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+}, [currentStep]);
     const [selectedAnimal, setSelectedAnimal] = useState("6a08851df5082f90aa481fda");
     const [selectedAnimalName, setSelectedAnimalName] = useState("Goat");
     const [bookingNo, setBookingNo] = useState("")
@@ -439,15 +448,15 @@ function Page() {
 
                                                     {dropdownOpen && (
                                                         <div className="Qurbani-select-options">
-                                                            <div onClick={() => { setSelectedDay("Day 1");setSelectedDayDate("05/27"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 1"); setSelectedDayDate("05/27"); setDropdownOpen(false); }}>
                                                                 Day 1 - 05/27
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("Day 2");setSelectedDayDate("05/28"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 2"); setSelectedDayDate("05/28"); setDropdownOpen(false); }}>
                                                                 Day 2 - 05/28
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("Day 3");setSelectedDayDate("05/29"); setDropdownOpen(false); }}>
+                                                            <div onClick={() => { setSelectedDay("Day 3"); setSelectedDayDate("05/29"); setDropdownOpen(false); }}>
                                                                 Day 3 - 05/29
                                                             </div>
                                                         </div>
@@ -672,11 +681,11 @@ function Page() {
                                                 justifyContent: "center",
                                                 gap: "5px"
                                             }}>
-                                                <strong style={{ marginBottom: '10px' }}>Booking No :</strong>{" "}
+                                                <strong className="booking_no_0" style={{ marginBottom: '10px' }}>Booking No :</strong>{" "}
                                                 <strong style={{ marginBottom: '10px' }}>{bookingNo}</strong>{" "}
                                             </div>
 
-                                             <div className="bookingSumarryLayout" >
+                                            <div className="bookingSumarryLayout" >
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Full Name:</strong> {formData.fullName}</p>
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Selected Day:</strong> {selectedDay} - {selectedDayDate}</p>
 
@@ -702,14 +711,14 @@ function Page() {
 
 
                                         <button
-  type="button"
-  className="Qurbani-stepper-submit-btn_QURBANI_STEPPER_"
-  onClick={() => {
-    window.location.href = "https://delcofarmersmarket.com";
-  }}
->
-  Back to Home
-</button>
+                                            type="button"
+                                            className="Qurbani-stepper-submit-btn_QURBANI_STEPPER_"
+                                            onClick={() => {
+                                                window.location.href = "https://delcofarmersmarket.com";
+                                            }}
+                                        >
+                                            Back to Home
+                                        </button>
 
                                     </div>
 
