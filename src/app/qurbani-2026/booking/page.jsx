@@ -49,6 +49,7 @@ function Page() {
 
     const [quantity, setQuantity] = useState(1);
     const [selectedDay, setSelectedDay] = useState("Day 1");
+    const [selectedDayDate, setSelectedDayDate] = useState("05/27");
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -429,25 +430,25 @@ function Page() {
                                                         className="Qurbani-select-box"
                                                         onClick={() => setDropdownOpen(!dropdownOpen)}
                                                     >
-                                                        {selectedDay === "Day 1" && "Day 1 "}
-                                                        {selectedDay === "Day 2" && "Day 2 "}
-                                                        {selectedDay === "Day 3" && "Day 3 "}
+                                                        {selectedDay === "Day 1" && "Day 1 - 05/27"}
+                                                        {selectedDay === "Day 2" && "Day 2 - 05/28"}
+                                                        {selectedDay === "Day 3" && "Day 3 - 05/29"}
 
                                                         <span className="arrow_qurbani-2026"><IoIosArrowDown /></span>
                                                     </div>
 
                                                     {dropdownOpen && (
                                                         <div className="Qurbani-select-options">
-                                                            <div onClick={() => { setSelectedDay("Day 1"); setDropdownOpen(false); }}>
-                                                                Day 1
+                                                            <div onClick={() => { setSelectedDay("Day 1");setSelectedDayDate("05/27"); setDropdownOpen(false); }}>
+                                                                Day 1 - 05/27
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("Day 2"); setDropdownOpen(false); }}>
-                                                                Day 2
+                                                            <div onClick={() => { setSelectedDay("Day 2");setSelectedDayDate("05/28"); setDropdownOpen(false); }}>
+                                                                Day 2 - 05/28
                                                             </div>
 
-                                                            <div onClick={() => { setSelectedDay("Day 3"); setDropdownOpen(false); }}>
-                                                                Day 3
+                                                            <div onClick={() => { setSelectedDay("Day 3");setSelectedDayDate("05/29"); setDropdownOpen(false); }}>
+                                                                Day 3 - 05/29
                                                             </div>
                                                         </div>
                                                     )}
@@ -582,7 +583,7 @@ function Page() {
                                         <p><strong>Name:</strong> {formData.fullName}</p>
                                         <p className="min-f"><strong>Email:</strong> {formData.email}</p>
                                         <p><strong>Phone:</strong> {formData.phone}</p>
-                                        <p><strong>Selected Day:</strong> {selectedDay}</p>
+                                        <p><strong>Selected Day:</strong> {selectedDay} - {selectedDayDate}</p>
                                         <p className="min-f">
                                             <strong>Address:</strong>{" "}
                                             {formData.streetAddress}, {formData.city}, {formData.state}, {formData.zip}
@@ -673,6 +674,12 @@ function Page() {
                                             }}>
                                                 <strong style={{ marginBottom: '10px' }}>Booking No :</strong>{" "}
                                                 <strong style={{ marginBottom: '10px' }}>{bookingNo}</strong>{" "}
+                                            </div>
+
+                                             <div className="bookingSumarryLayout" >
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Full Name:</strong> {formData.fullName}</p>
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>Selected Day:</strong> {selectedDay} - {selectedDayDate}</p>
+
                                             </div>
 
                                             <div className="bookingSumarryLayout" >
