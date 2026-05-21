@@ -18,6 +18,7 @@ import Departments2 from "../Department2/departments";
 import Link from "next/link";
 import Departments3 from "../Department2/departments2";
 import ComingSoonPopup from "../comingSoon/comingSoon";
+import ComingSoonPopupMain from "../comingSoon2/comingSoon";
 
 const Products = ({ scrollToSection, onClick }) => {
 
@@ -186,7 +187,7 @@ const Products = ({ scrollToSection, onClick }) => {
               </div>
             ))}
           {showModal && selectedProduct && (
-            <ComingSoonPopup isOpen={showModal} onClose={()=>{setShowModal(false)}}/>
+            <ComingSoonPopupMain isOpen={showModal} onClose={()=>{setShowModal(false)}}/>
           )}
         </div>
       </div>

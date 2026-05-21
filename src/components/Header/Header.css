@@ -998,6 +998,10 @@
   border-radius: 4px;
 }
 
+.sub-header-right-buttons.for-mob-view{
+  display: none !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .tagline-text {
@@ -1080,6 +1084,21 @@
   font-weight: 600;
   font-size: 9px;
   line-height: 11px;
+}
+
+
+
+.sub-header-right-buttons.for-mob-view{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-header-right-buttons.for-mob-view > button{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 }

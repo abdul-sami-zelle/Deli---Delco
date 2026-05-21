@@ -13,7 +13,9 @@ import { getSalesProductData, getCategories, getHeaderDepartments } from "@/lib/
 import LocationModal from "../LocationModal/LocationModal";
 import DeliveryModal from "../DeliveryModal/DeliveryModal";
 import ComingSoonPopup from "../comingSoon/comingSoon";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";;
+
+
 
 export default function Header({ onDeptClick, onDiscountClick }) {
   const router = useRouter();
@@ -28,18 +30,16 @@ export default function Header({ onDeptClick, onDiscountClick }) {
   const [loading, setLoading] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
   const [popupTitle, setPopupTitle] = useState("");
+
+
+const handleOpenQurbani = () => {
+  router.push("/qurbani-2026");
+};
+
+
   const handleDeptClick = (dept) => {
     const name = dept.name?.toLowerCase();
-    if (
-      name === "grocery" ||
-      name === "butcher shop" ||
-      name === "prepared food"
-    ) {
-      window.location.href = dept.url;
-    } else {
-      setPopupTitle(dept.name);
-      setIsOpen(true);
-    }
+    window.location.href = dept.url;
   };
   const slides = [
     "/assets/Images/1.jpg",
@@ -308,6 +308,18 @@ export default function Header({ onDeptClick, onDiscountClick }) {
 
 
 
+              <div className="sub-header-right-buttons for-mob-view">
+              <button onClick={handleOpenQurbani}
+                className={"active"}
+              >
+                <span>
+                  <img src="/assets/Icons/qurbani.svg" alt="pickup" />
+                </span>{" "}
+                Qurbani 2026
+              </button></div>
+
+
+
 
               <div className="sidebar-dropdown">
                 <div
@@ -508,6 +520,17 @@ export default function Header({ onDeptClick, onDiscountClick }) {
 
 
           </div>
+
+          <div className="sub-header-right-buttons ">
+              <button onClick={handleOpenQurbani}
+                className={"active"}
+              >
+                <span>
+                  <img src="/assets/Icons/qurbani.svg" alt="pickup" />
+                </span>{" "}
+                Qurbani 2026
+              </button></div>
+
 
           <div className="sub-header-right">
             <div className="location">

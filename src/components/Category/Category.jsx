@@ -21,6 +21,7 @@ import SortDropdown from "../customDropdown/customDropDown";
 import SideCart from "../SideCart/SideCart";
 import GridToggle from "../gridToggle/gridToggle";
 import ComingSoonPopup from "../comingSoon/comingSoon";
+import ComingSoonPopupMain from "../comingSoon2/comingSoon";
 
 export default function Category({ deptCategories }) {
   const router = useRouter();
@@ -317,7 +318,7 @@ export default function Category({ deptCategories }) {
           />
         </div>
       </div>
-      <ComingSoonPopup isOpen={isOpen} onClose={() => { setIsOpen(false) }} />
+      <ComingSoonPopupMain isOpen={isOpen} onClose={() => { setIsOpen(false) }} />
     </div>
   );
 }
