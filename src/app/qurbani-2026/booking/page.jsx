@@ -743,7 +743,7 @@ function Page() {
                                         Your Booking Has Been Received
                                     </h3>
 
-                                    <p className="para_2">Thank you for booking your Eid-ul-Adha Qurbani with Delco Farmers Market. We have successfully received your booking, our team will shortly contact you for confirmation.</p>
+                                    <p className="para_2 desktop">Thank you for booking your Eid-ul-Adha Qurbani with Delco Farmers Market. We have successfully received your booking, our team will shortly contact you for confirmation.</p>
 
                                     <div className="Qurbani-2026-slider-card-confirmation-page">
 
@@ -755,6 +755,9 @@ function Page() {
                                         />
 
                                     </div>
+
+                                                                        <p className="para_2 mobile">Thank you for booking your Eid-ul-Adha Qurbani with Delco Farmers Market. We have successfully received your booking, our team will shortly contact you for confirmation.</p>
+
 
                                     <div className="Qurbani-review-box_QURBANI_STEPPER_">
 
@@ -806,8 +809,7 @@ function Page() {
 
                                     <div className="Qurbani-stepper-footer-panel_QURBANI_STEPPER_ desktop_bth_tn confirmation_step">
 
-
-
+                                     
 
                                         <button
                                             type="button"
@@ -818,6 +820,15 @@ function Page() {
                                         >
                                             Back to Home
                                         </button>
+   {formData.onsite === 'Yes' && <button
+                                            type="button"
+                                            className="Qurbani-stepper-back-btn_QURBANI_STEPPER_"
+                                            onClick={() => {
+                                                window.location.href = "https://maps.app.goo.gl/qj6jtaSEwucSkW428"
+                                            }}
+                                        >
+                                            Get Direction
+                                        </button>}
 
                                     </div>
 

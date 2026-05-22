@@ -224,7 +224,7 @@ text-decoration: none;
 .Qurbani-step-title_QURBANI_STEPPER_.confirmation{
     background-color: #4b5320;
     color: #fff !important;
-    width: fit-content;
+    width:100%;
     padding: 5px 8px;
     border-radius: 4px;
     margin: 0 auto;
@@ -240,6 +240,10 @@ text-decoration: none;
     line-height: 15px;
     text-align: center;
     margin-bottom: 12px;
+}
+
+.para_2.mobile{
+    display: none;
 }
 
 .Qurbani-step-title_QURBANI_STEPPER_.confirmation img{
@@ -442,7 +446,7 @@ text-decoration: none;
 .Qurbani-stepper-back-btn_QURBANI_STEPPER_ {
     background: transparent;
     color: #64748b;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #4b5320 !important;
     padding: 12px 24px;
     border-radius: 12px;
     font-size: 15px;
@@ -580,6 +584,14 @@ text-decoration: none;
     .booking_page_left{
         display: none !important;
     }
+
+    .para_2.mobile{
+    display: block;
+    margin-top: 10px;
+}
+ .para_2.desktop{
+    display: none;
+}
 
 }
 
@@ -787,6 +799,10 @@ text-decoration: none;
         justify-content: flex-start;
     }
 
+    .location-address-last > a{
+        display: none;
+    }
+
    
 }
 
@@ -865,7 +881,7 @@ text-decoration: none;
 .Qurbani-stepper-back-btn_QURBANI_STEPPER_ {
     background: var(--light-gray);
     color: var(--text-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid #4b5320 !important;
 }
 
 .Qurbani-stepper-back-btn_QURBANI_STEPPER_:hover {
