@@ -205,7 +205,7 @@ text-decoration: none;
 .Qurbani-stepper-card_QURBANI_STEPPER_ {
     background: #ffffff;
     border-radius: 24px;
-    padding: 36px;
+    padding:  20px 28px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     font-family: inherit;
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -217,7 +217,8 @@ text-decoration: none;
     font-size: 22px;
     font-weight: 700;
     color: #0b2240;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .Qurbani-step-title_QURBANI_STEPPER_.confirmation{
@@ -238,7 +239,7 @@ text-decoration: none;
     color: #595959;
     line-height: 15px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .Qurbani-step-title_QURBANI_STEPPER_.confirmation img{
@@ -257,7 +258,7 @@ text-decoration: none;
 .Qurbani-animal-card_QURBANI_STEPPER_ {
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 24px 14px;
+    padding: 16px 14px;
     text-align: center;
     cursor: pointer;
     background: #ffffff;
@@ -284,7 +285,7 @@ text-decoration: none;
     font-weight: 700;
     font-size: 16px;
     color: #0b2240;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }
 
 .Qurbani-animal-weight_QURBANI_STEPPER_ {
@@ -292,7 +293,7 @@ text-decoration: none;
     color: #3b3e44;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
 }
 
 .Qurbani-animal-price_QURBANI_STEPPER_ {
@@ -588,13 +589,15 @@ text-decoration: none;
     font-size: 14px;
     color: #4b5563;
     margin-bottom: 24px;
-    margin-top: -18px;
+    margin-top: -10px;
+    line-height: 16px;
+    text-align: start;
 }
 
 .Qurbani-form-layout_QURBANI_STEPPER_ {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 10px;
 }
 
 .Qurbani-form-row-split_QURBANI_STEPPER_ {
@@ -710,6 +713,12 @@ text-decoration: none;
 
 /* Responsive updates for input items */
 @media (max-width: 600px) {
+.payment_instr.desktop{
+    display: none;
+}
+    .payment_instr.mobile{
+    display: flex !important;
+}
 
     .booking_no_0{
         display: none !important;
@@ -731,6 +740,10 @@ text-decoration: none;
 
     .Qurbani-stepper-footer-panel_QURBANI_STEPPER_ button{
         width: 100%;
+    }
+
+    .review_section_sr{
+        flex-direction: column;
     }
 
 
@@ -760,6 +773,20 @@ text-decoration: none;
         width: 100%;
     }
 
+    .location-address-last{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+
+    .location-address-last-inner{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
    
 }
 
@@ -775,16 +802,16 @@ text-decoration: none;
     font-size: 20px;
     font-weight: 600;
     color: var(--text-color);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 /* Review Card */
 .Qurbani-review-box_QURBANI_STEPPER_ {
-    margin-top: 15px;
+    margin-top: 10px;
     border-radius: 14px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 /* Each row like form field style */
@@ -956,4 +983,127 @@ text-decoration: none;
 .Qurbani-2026-slider-card-confirmation-page{
     width: 100% ;
     height: auto;
+}
+.payment_instr{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background-color: #FFF3CD;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+   border-radius: 8px;
+   margin-bottom: 10px;
+}
+
+.payment_instr.mobile{
+    display: none;
+}
+
+.payment_instr p{
+    font-family: 'Poppins';
+ font-size: 14px;
+ color: #7A5200;
+ font-weight: 400;
+    line-height: 18px;
+    font-weight: 400;
+    text-align: start;
+}
+
+.label-1{
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+    line-height: 16px;
+    text-align: start;
+}
+
+.radio_opts{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.error-text{
+    font-size: 10px;
+    color: rgb(217, 15, 15);
+    line-height: 12px;
+    text-align: start;
+    margin-top: 6px;
+    animation: shakeError 0.35s ease-in-out;
+}
+
+.radio_opts_error {
+    border: 2px solid #e53935;
+    border-radius: 10px;
+    padding: 5px;
+    background: rgba(229, 57, 53, 0.05);
+    animation: shakeError 0.35s ease-in-out;
+}
+@keyframes shakeError {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}
+
+.location-address{
+    width: fit-content;
+    padding: 8px 12px;
+    /* display: flex; */
+    font-size: 12px;
+    line-height: 14px;
+    color: #4b5320;
+    background-color: #4b532030;
+    border: 1px solid #4b5320;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+.location-address-last{
+    width:100%;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: 14px;
+    color: #4b5320;
+    background-color: #4b532030;
+    border: 1px solid #4b5320;
+    border-radius: 4px;
+    margin-top: 0px;
+    font-weight: 400;
+}
+
+.location-address-last a{
+    color: #4b5320;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #4b5320;
+    color: #fff;
+    width: fit-content;
+
+}
+
+.location-address-last-inner{
+    display: flex;
+}
+
+.review_section_sr{
+    display: flex;
+    flex-shrink: 0;
+    gap: 10px;
+}
+
+.review_section_sr p{
+    width: 100%;
 }

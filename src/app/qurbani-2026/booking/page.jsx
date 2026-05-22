@@ -9,6 +9,7 @@ import {
 import Header from "@/components/Header/Header copy";
 import { IoIosArrowDown } from "react-icons/io";
 import Loader from "@/components/Loader/Loader";
+import RadioButton from "@/components/RadioButton/radioBtn";
 
 
 
@@ -17,11 +18,11 @@ function Page() {
 
     const [currentStep, setCurrentStep] = useState(1);
     useEffect(() => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
-}, [currentStep]);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [currentStep]);
     const [selectedAnimal, setSelectedAnimal] = useState("6a08851df5082f90aa481fda");
     const [selectedAnimalName, setSelectedAnimalName] = useState("Goat");
     const [bookingNo, setBookingNo] = useState("")
@@ -67,7 +68,8 @@ function Page() {
         city: "",
         state: "",
         zip: "",
-        instructions: ""
+        instructions: "",
+        onsite: "No"
     });
 
     const handleZipLookup = async (zip) => {
@@ -195,6 +197,26 @@ function Page() {
         }
     };
 
+    const handleStepOneNext = () => {
+
+        if (!formData.onsite) {
+
+            setErrors(prev => ({
+                ...prev,
+                onsite: "Please select an option"
+            }));
+
+            return;
+        }
+
+        setErrors(prev => ({
+            ...prev,
+            onsite: ""
+        }));
+
+        handleNextStep();
+    };
+
     const handleNextStep = () => {
         setCurrentStep(prev => prev + 1);
     };
@@ -218,7 +240,8 @@ function Page() {
                 city: formData.city,
                 state: formData.state,
                 zip_code: formData.zip,
-                instruction: formData.instructions
+                instruction: formData.instructions,
+                onsite: formData.onsite       // ← add this
             };
 
             const response = await fetch(
@@ -278,10 +301,19 @@ function Page() {
                             <span>CLOSES MAY 27, 2026</span>
                         </div> */}
 
+                        <div className="payment_instr desktop">
+                            <img src="/assets/Icons/info.svg" style={{ height: "20px", width: "20px" }} alt="" srcset="" />
+                            <p>A <strong>50% deposit</strong> must be dropped off at the store. This booking does not confirm your Qurbani — it is only a reservation. Your reservation will only be confirmed once the deposit is received at Delco Farmers Market.</p>
+                        </div>
+
                         <h1 className="Qurbani-2026-heading">
                             Book Your <span>Qurbani</span> <br />
                             Today
                         </h1>
+
+
+
+
 
                         <div className="Qurbani-2026-buttons">
                             <a href="tel:+16108621955">
@@ -306,6 +338,10 @@ function Page() {
                     <div className="Qurbani-2026-right">
 
                         <div className="Qurbani-stepper-card_QURBANI_STEPPER_">
+                            <div className="payment_instr mobile">
+                                <img src="/assets/Icons/info.svg" style={{ height: "20px", width: "20px" }} alt="" srcset="" />
+                                <p>A <strong>50% deposit</strong> must be dropped off at the store. This booking does not confirm your Qurbani — it is only a reservation. Your reservation will only be confirmed once the deposit is received at Delco Farmers Market.</p>
+                            </div>
 
                             {/* ================= STEP 1 ================= */}
                             {currentStep === 1 && (
@@ -391,12 +427,60 @@ function Page() {
                                             </div>
                                         </div>
 
+
+
                                     </div>
+
+                                    <div className="Qurbani-quantity-block_QURBANI_STEPPER_">
+                                        <p className="label-1">Do you require On-site slaughter arrangements?*</p>
+                                        <div className={`radio_opts ${errors.onsite ? "radio_opts_error" : ""}`}>
+                                            <RadioButton
+                                                id="onsite-no"
+                                                name="onsite"
+                                                label="No"
+                                                value="No"
+                                                checked={formData.onsite === "No"}
+                                                onChange={() => {
+                                                    setFormData(prev => ({ ...prev, onsite: "No" }));
+
+                                                    setErrors(prev => ({
+                                                        ...prev,
+                                                        onsite: ""
+                                                    }));
+                                                }}
+                                            />
+                                            <RadioButton
+                                                id="onsite-yes"
+                                                name="onsite"
+                                                label="Yes"
+                                                value="Yes"
+                                                checked={formData.onsite === "Yes"}
+                                                onChange={() => {
+                                                    setFormData(prev => ({ ...prev, onsite: "Yes" }));
+
+                                                    setErrors(prev => ({
+                                                        ...prev,
+                                                        onsite: ""
+                                                    }));
+                                                }}
+                                            />
+
+                                        </div>
+                                        {errors.onsite && (
+                                            <p className="error-text">{errors.onsite}</p>
+                                        )}
+                                    </div>
+                                    {formData.onsite === 'Yes' && <div className="location-address">
+                                        <img src="/assets/Icons/location.svg" style={{ height: "14px", width: "14px" }} alt="" srcset="" />{" "}
+                                        On-site Slaughter Location :{" "}
+                                        <strong>24 Mahoning Dr E, Lehighton, PA 18235</strong>
+                                    </div>}
+
 
                                     <div className="Qurbani-stepper-actions_QURBANI_STEPPER_">
                                         <button
                                             className="Qurbani-stepper-next-btn_QURBANI_STEPPER_"
-                                            onClick={handleNextStep}
+                                            onClick={handleStepOneNext}
                                         >
                                             Next →
                                         </button>
@@ -592,7 +676,10 @@ function Page() {
                                         <p><strong>Name:</strong> {formData.fullName}</p>
                                         <p className="min-f"><strong>Email:</strong> {formData.email}</p>
                                         <p><strong>Phone:</strong> {formData.phone}</p>
-                                        <p><strong>Selected Day:</strong> {selectedDay} - {selectedDayDate}</p>
+                                        <div className="review_section_sr">
+                                            <p><strong>Selected Day:</strong> {selectedDay} - {selectedDayDate}</p>
+                                            <p><strong>Require On-site Slaughter:</strong>{formData.onsite}</p>
+                                        </div>
                                         <p className="min-f">
                                             <strong>Address:</strong>{" "}
                                             {formData.streetAddress}, {formData.city}, {formData.state}, {formData.zip}
@@ -662,7 +749,7 @@ function Page() {
 
                                         {/* Replace this image with your own */}
                                         <img
-                                            src="/Qurbani_Destop Banner_Delco_small.jpeg"
+                                            src="/2.jpeg"
                                             alt="Qurbani Poster"
                                             className="Qurbani-2026-slider-image"
                                         />
@@ -694,12 +781,24 @@ function Page() {
                                             <div className="bookingSumarryLayout" >
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Animal:</strong> {selectedAnimalName}</p>
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Quantity:</strong> {quantity}</p>
+                                                <p style={{ marginBottom: '10px', width: '100%' }}><strong>On-site Slaughter:</strong> {formData.onsite}</p>
 
                                             </div>
                                             <div className="bookingSumarryLayout">
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Unit Price:</strong> ${unitPrice.toFixed(2)}</p>
                                                 <p style={{ marginBottom: '10px', width: '100%' }}><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
                                             </div>
+
+
+                                            {formData.onsite === 'Yes' && <div className="location-address-last">
+                                               
+                                               <div className="location-address-last-inner"><span>On-site Slaughter Location :</span>
+                                                <strong>24 Mahoning Dr E, Lehighton, PA 18235</strong></div>
+
+                                                <a href="https://maps.app.goo.gl/qj6jtaSEwucSkW428" target="_blank">Get Direction</a>
+                                            </div>}
+
+
 
                                         </p>
 
