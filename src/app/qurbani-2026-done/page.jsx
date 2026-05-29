@@ -50,9 +50,7 @@ function page() {
 
                             <div className="Qurbani-2026-buttons">
 
-                                {/* <button onClick={()=>{window.location.href = "/qurbani-2026/booking"}} className="Qurbani-2026-primary-btn">
-                                Book Your Qurbani →
-                            </button> */}
+                            
 
                                 <Link
                                     href="/qurbani-2026/booking"

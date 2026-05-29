@@ -32,10 +32,6 @@ export default function Header({ onDeptClick, onDiscountClick }) {
   const [popupTitle, setPopupTitle] = useState("");
 
 
-const handleOpenQurbani = () => {
-  router.push("/qurbani-2026");
-};
-
 
   const handleDeptClick = (dept) => {
     const name = dept.name?.toLowerCase();
@@ -308,16 +304,7 @@ const handleOpenQurbani = () => {
 
 
 
-              <div className="sub-header-right-buttons for-mob-view">
-              <button onClick={handleOpenQurbani}
-                className={"active"}
-              >
-                <span>
-                  <img src="/assets/Icons/qurbani.svg" alt="pickup" />
-                </span>{" "}
-                Qurbani 2026
-              </button></div>
-
+              
 
 
 
@@ -521,15 +508,7 @@ const handleOpenQurbani = () => {
 
           </div>
 
-          <div className="sub-header-right-buttons ">
-              <button onClick={handleOpenQurbani}
-                className={"active"}
-              >
-                <span>
-                  <img src="/assets/Icons/qurbani.svg" alt="pickup" />
-                </span>{" "}
-                Qurbani 2026
-              </button></div>
+      
 
 
           <div className="sub-header-right">
