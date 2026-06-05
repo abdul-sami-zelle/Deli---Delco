@@ -270,7 +270,7 @@ export default function Header({ onDeptClick, onDiscountClick }) {
             <div className="sidebar" onClick={(e) => e.stopPropagation()}>
               <div className="sidebar-header">
                 <img src="/assets/Images/logo.png" alt="logo" />
-                <h2>Delco Farmers Market</h2>
+                <h2>Delco Farmers Markets</h2>
               </div>
 
               <div className="sidebar-links">
