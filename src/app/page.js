@@ -41,12 +41,12 @@ export default function Home() {
           {/* <HeroSection2/> */}
           <MainSlider />
           <Products scrollToSection={scrollToSection} onClick={(deptName) => setScrollToSection(deptName)} />
-          <div
+          {/* <div
             className="sale-product-container"
             style={{ backgroundColor: saleBgColor }}
           >
             <SaleProducts scrollToSection={scrollToSectionSale} />
-          </div>
+          </div> */}
           <FtBanner />
 
           <Footer_2 />

@@ -1012,8 +1012,6 @@
   width: 18px;
   height: 18px;
   border-radius: 4px;
-  color: white;
-  filter: invert(1);
 }
 
 .sub-header-right-buttons.for-mob-view {
